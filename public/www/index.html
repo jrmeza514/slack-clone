@@ -2,33 +2,133 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/app.js" async></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
     <title>Slack Clone</title>
   </head>
-  <body>
-    <div class="nav_drawer">
-      <section class="nav_links">
-        <li class="item">
-          <div class="ic"></div>
-          <div class="title">Search</div>
-        </li>
-        <li class="item">
-          <div class="ic"></div>
-          <div class="title">Search</div>
-        </li>
+  <body ng-app="SlackClone">
+    <div id="nav_drawer" ng-controller="GroupSelectController as ctrl" class="nav_drawer">
+      <section class="head">
+        <md-input-container>
+          <label>Group</label>
+          <md-select ng-model="ctrl.selectedGroup">
+            <md-option ng-repeat="group in ctrl.groups" value="{{group}}">{{group}}</md-option>
+          </md-select>
+        </md-input-container>
       </section>
+      <div class="wrapper">
+        <section class="unread common">
+          <div class="title">Channels</div>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">changes</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">general</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">marketing</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">products</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">random</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">sales</div>
+          </li>
+          <li class="item">
+            <div class="ic">#</div>
+            <div class="title">support</div>
+          </li>
+          <li class="more">
+            <div class="ic">+</div>
+            <div class="title">more...</div>
+          </li>
+        </section>
+        <section class="dm common">
+          <div class="title">Direct Messages</div>
+          <li class="item">
+            <div class="ic">*</div>
+            <div class="title">slack bot</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">david</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">don</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">eric</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">jessica</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">liz</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">myles</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">steweart</div>
+          </li>
+          <li class="item"> 
+            <div class="ic">*</div>
+            <div class="title">tara</div>
+          </li>
+          <li class="more"> 
+            <div class="ic">+</div>
+            <div class="title">more ...</div>
+          </li>
+        </section>
+      </div>
       <section class="footer">
-        <div class="item ic"></div>
-        <div class="item login">Login</div>
+        <div class="item avatar"></div>
+        <div class="item info">
+          <div class="name"> Juan Meza</div>
+          <div class="status">
+            <div class="status_ic"></div>
+            <div class="status_txt">Online</div>
+          </div>
+        </div>
+        <div id="settings_button" class="item settings">
+          <div id="options_menu" class="menu">
+            <div class="option">Profile</div>
+            <div class="option">Help</div>
+            <div class="option">Settings</div>
+            <div class="option">Logout</div>
+          </div>
+        </div>
       </section>
     </div>
+    <div id="nav_back_drop" class="nav_back_drop"></div>
     <div class="container">
       <header class="nav_bar">
-        <div class="hamburger"></div>
-        <div class="title">Slack Clone</div>
+        <div id="hamburger" class="hamburger"> </div>
+        <div class="title">slackr</div>
       </header>
     </div>
   </body>
+  <script src="js/app.js"></script>
 </html>
