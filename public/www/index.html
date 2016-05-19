@@ -14,92 +14,27 @@
     <title>Slack Clone</title>
   </head>
   <body ng-app="SlackClone">
-    <div id="nav_drawer" ng-controller="GroupSelectController as ctrl" class="nav_drawer">
+    <div id="nav_drawer" ng-controller="AppDrawerController" class="nav_drawer">
       <section class="head">
-        <md-input-container>
+        <md-input-container ng-controller="GroupSelectController as gsCtrl">
           <label>Group</label>
           <md-select ng-model="ctrl.selectedGroup">
-            <md-option ng-repeat="group in ctrl.groups" value="{{group}}">{{group}}</md-option>
+            <md-option ng-repeat="group in gsCtrl.groups" value="{{group}}">{{group}}</md-option>
           </md-select>
         </md-input-container>
       </section>
-      <div class="wrapper">
-        <section class="unread common">
-          <div class="title">Channels</div>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">changes</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">general</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">marketing</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">products</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">random</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">sales</div>
-          </li>
-          <li class="item">
-            <div class="ic">#</div>
-            <div class="title">support</div>
-          </li>
-          <li class="more">
-            <div class="ic">+</div>
-            <div class="title">more...</div>
-          </li>
+      <div class="wrappersl">
+        <section ng-controller="SectionUnreadController as suCtrl" class="unread common">
+          <div class="title">{{ suCtrl.title }}</div>
+          <li ng-repeat="item in suCtrl.items" class="item"><a ng-href="{{item.link}}">
+              <div class="ic">#</div>
+              <div class="title">{{item.name}}</div></a></li>
         </section>
-        <section class="dm common">
+        <section ng-controller="DirectMessagesController as dmCtrl" class="dm common">
           <div class="title">Direct Messages</div>
-          <li class="item">
+          <li ng-repeat="item in dmCtrl.dms" class="item">
             <div class="ic">*</div>
-            <div class="title">slack bot</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">david</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">don</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">eric</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">jessica</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">liz</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">myles</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">steweart</div>
-          </li>
-          <li class="item"> 
-            <div class="ic">*</div>
-            <div class="title">tara</div>
-          </li>
-          <li class="more"> 
-            <div class="ic">+</div>
-            <div class="title">more ...</div>
+            <div class="title">{{ item.name }}</div>
           </li>
         </section>
       </div>

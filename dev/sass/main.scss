@@ -15,7 +15,10 @@ html, body{
 *{
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  // border: 1px solid red;
+  color: inherit;
+}
+a{
+  text-decoration: none;
 }
 
 .nav_back_drop{
@@ -92,11 +95,13 @@ html, body{
         display: inline-block;
         vertical-align: top;
         text-align: center;
+        color: white;
       }
       .title{
         margin-left: 2px;
         display: inline-block;
         vertical-align: bottom;
+        color: white;
       }
     }
   }
@@ -218,6 +223,12 @@ html, body{
       font-size: 1.4em;
       cursor: pointer;
       display: inline-block;
+      background-image: url('../img/ic_menu.svg');
+      background-size: 80% 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+      will-change: width;
+      transition: width 0.25s ease-in-out;
     }
 
     .title{
@@ -242,5 +253,13 @@ html, body{
   .container{
     width: calc( 100% - 300px);
     transform: translateX( 300px );
+
+    .nav_bar{
+      .hamburger{
+        width: 0;
+      }
+    }
   }
+
+
 }

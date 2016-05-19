@@ -1,11 +1,45 @@
 (function () {
   'use strict';
-  angular
-      .module('SlackClone', ['ngMaterial'])
-      .controller('GroupSelectController', function() {
-        this.selectedGroup = '';
-        this.groups = ['Juan\'s Group', 'Other Group'];
-      });
+
+  var app = angular.module('SlackClone', ['ngMaterial']);
+
+
+  app.controller('GroupSelectController', function() {
+    this.selectedGroup = '';
+    this.groups = ['Juan\'s Group', 'Other Group'];
+  });
+
+  app.controller('AppDrawerController', function(){
+
+  });
+
+  app.controller('SectionUnreadController', function(){
+    this.title = "Channels";
+    this.items = [
+      { name: 'changes', link : "#" },
+      { name: 'general', link : "#" },
+      { name: 'marketing', link : "#" },
+      { name: 'products', link : "#" },
+      { name: 'random', link : "#" },
+      { name: 'sales', link : "#" },
+      { name: 'support', link : "#" }
+    ];
+  });
+
+  app.controller('DirectMessagesController', function(){
+      this.dms  =[
+        { name: 'slack bot', threadId: 'some threadId' },
+        { name: 'david', threadId: 'some threadId' },
+        { name: 'don', threadId: 'some threadId' },
+        { name: 'eric', threadId: 'some threadId' },
+        { name: 'jessica', threadId: 'some threadId' },
+        { name: 'liz', threadId: 'some threadId' },
+        { name: 'myles', threadId: 'some threadId' },
+        { name: 'steweart', threadId: 'some threadId' },
+        { name: 'tara', threadId: 'some threadId' }
+      ];
+  });
+
 })();
 
 window.onload = (function(){

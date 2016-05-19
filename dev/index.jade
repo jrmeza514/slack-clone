@@ -4,82 +4,39 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, user-scalable=no")
     meta(name="mobile-web-app-capable", content="yes")
     meta(charset="utf-8")
+    
+    //- stylesheets
     link(rel="stylesheet", href="css/main.css")
     link(rel="stylesheet", href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css")
+    
+    //- scripts
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js")
+    
     title Slack Clone
     
   body(ng-app="SlackClone")
-    div#nav_drawer.nav_drawer(ng-controller="GroupSelectController as ctrl")
+    div#nav_drawer.nav_drawer(ng-controller="AppDrawerController")
       section.head
-        md-input-container
+        md-input-container(ng-controller="GroupSelectController as gsCtrl")
           label Group
           md-select(ng-model="ctrl.selectedGroup")
-            md-option(ng-repeat="group in ctrl.groups", value="{{group}}") {{group}}
-      div.wrapper
-        section.unread.common
-          div.title Channels
-          li.item
-            div.ic #
-            div.title changes
-          li.item
-            div.ic #
-            div.title general
-          li.item
-            div.ic #
-            div.title marketing
-          li.item
-            div.ic #
-            div.title products
-          li.item
-            div.ic #
-            div.title random
-          li.item
-            div.ic #
-            div.title sales
-          li.item
-            div.ic #
-            div.title support
-          li.more
-            div.ic +
-            div.title more...
-        section.dm.common
+            md-option(ng-repeat="group in gsCtrl.groups", value="{{group}}") {{group}}
+      div.wrappersl
+        section.unread.common(ng-controller="SectionUnreadController as suCtrl")
+          div.title {{ suCtrl.title }}
+          li.item(ng-repeat="item in suCtrl.items")
+            a(ng-href="{{item.link}}")
+              div.ic #
+              div.title {{item.name}}
+        section.dm.common(ng-controller="DirectMessagesController as dmCtrl")
           div.title Direct Messages
-          li.item
+          li.item(ng-repeat="item in dmCtrl.dms")
             div.ic *
-            div.title slack bot
-          li.item 
-            div.ic *
-            div.title david
-          li.item 
-            div.ic *
-            div.title don
-          li.item 
-            div.ic *
-            div.title eric
-          li.item 
-            div.ic *
-            div.title jessica
-          li.item 
-            div.ic *
-            div.title liz
-          li.item 
-            div.ic *
-            div.title myles
-          li.item 
-            div.ic *
-            div.title steweart
-          li.item 
-            div.ic *
-            div.title tara
-          li.more 
-            div.ic +
-            div.title more ...
-                      
+            div.title {{ item.name }}
       section.footer
         div.item.avatar
         div.item.info

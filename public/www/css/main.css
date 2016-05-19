@@ -6,7 +6,11 @@ html, body {
 
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  color: inherit; }
+
+a {
+  text-decoration: none; }
 
 .nav_back_drop {
   position: absolute;
@@ -60,11 +64,13 @@ html, body {
       height: 0.7em;
       display: inline-block;
       vertical-align: top;
-      text-align: center; }
+      text-align: center;
+      color: white; }
     .nav_drawer section.common > .item .title, .nav_drawer section.common > .more .title {
       margin-left: 2px;
       display: inline-block;
-      vertical-align: bottom; }
+      vertical-align: bottom;
+      color: white; }
   .nav_drawer section.dm .item .ic {
     font-size: 1.4em;
     vertical-align: top;
@@ -149,7 +155,13 @@ html, body {
       text-align: center;
       font-size: 1.4em;
       cursor: pointer;
-      display: inline-block; }
+      display: inline-block;
+      background-image: url("../img/ic_menu.svg");
+      background-size: 80% 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+      will-change: width;
+      transition: width 0.25s ease-in-out; }
     .container .nav_bar .title {
       display: inline-block;
       vertical-align: top;
@@ -165,4 +177,6 @@ html, body {
     opacity: 0; }
   .container {
     width: calc( 100% - 300px);
-    transform: translateX(300px); } }
+    transform: translateX(300px); }
+    .container .nav_bar .hamburger {
+      width: 0; } }
