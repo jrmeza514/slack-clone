@@ -42,11 +42,11 @@
 
   app.controller('ThreadMessagesController', function(){
     this.messages = [
-      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
-      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
-      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
-      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
-      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"}
+      { name: 'Juan Meza', title: "Monthly Meeting", body: "Hey Guys... We are having a coorporate meeting tonight"},
+      { name: 'John Doe', title: "Can't Make it", body: "Sorry Man I can't make it that day."},
+      { name: 'Jane Doe', title: "Me either", body: "My daughter's ballet recital uis that day"},
+      { name: 'Dolores Amet', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
+      { name: 'Lorem Ipsum', title: "Aswesome message", body: "Holly balls man! This shit be awesome"}
     ];
   });
 })();

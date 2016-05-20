@@ -191,7 +191,8 @@ div.thread .threadHeader {
     border: none;
     padding: 5px;
     box-sizing: border-box;
-    color: #2d2d2d; }
+    color: #2d2d2d;
+    border-radius: 2px; }
 
 div.thread .threadMessages {
   padding: 10px; }
