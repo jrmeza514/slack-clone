@@ -63,6 +63,27 @@
         <div id="hamburger" class="hamburger"> </div>
         <div class="title">slackr</div>
       </header>
+      <div class="mainView">
+        <div class="thread">
+          <div class="threadHeader">
+            <div class="threadTitle">#slackr</div>
+            <div class="threadUserCount">14</div>
+            <div class="threadInfoButton"></div>
+            <div class="threadSearch">
+              <input type="text" placeholder="Seacrch Thread">
+            </div>
+          </div>
+          <div ng-controller="ThreadMessagesController as tmCtrl" class="threadMessages">
+            <div ng-repeat="message in tmCtrl.messages" class="message">
+              <div class="messageHeader"> 
+                <div class="messageTitle">{{ message.title }}</div>
+                <div class="messageAuthor">{{ message.name }}</div>
+              </div>
+              <div class="messageBody">{{ message.body }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   <script src="js/app.js"></script>

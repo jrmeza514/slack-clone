@@ -3,7 +3,7 @@ $nav_drawer_bg: #37474F;
 $nav_drawer_color: #FAFAFA;
 $drawer_transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
 $drawer_transition_no_opacity: transform 0.25s ease-in-out;
-$nav_bar_bg: #DD2C00;
+$nav_bar_bg: #D50000;
 
 html, body{
   margin: 0;
@@ -239,6 +239,71 @@ a{
   }
 }
 
+div.thread {
+
+  .threadHeader{
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #F44336;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    font-size: 1.2em;
+    text-align: center;
+    color: white;
+
+    > div{
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .threadTitle{
+      font-weight: bold;
+    }
+
+    .threadUserCount{
+      margin: 0 10px;
+    }
+
+    .threadSearch{
+
+      input{
+        outline: none;
+        border: none;
+        padding: 5px;
+        box-sizing: border-box;
+        color: #2d2d2d;
+      }
+    }
+  }
+
+  .threadMessages{
+    padding: 10px;
+    .message{
+      padding: 10px;
+      border-radius: 2px;
+      background-color: #f3f3f3;
+      box-shadow: 2px 2px 2px 1px rgba( 0 , 0 , 0 , 0.2 );
+      margin-bottom: 20px;
+      max-width: 600px;
+      .messageHeader{
+        border-bottom: 1px solid rgba( 0 , 0 , 0 , 0.2 );
+        margin-bottom: 15px;
+        font-size: 1.1em;
+
+        .messageTitle, .messageAuthor{
+          display: inline-block;
+        }
+
+        .messageAuthor{
+          float: right;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (min-width: 1000px) {
   .nav_drawer{

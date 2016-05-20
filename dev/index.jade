@@ -56,4 +56,19 @@ html(lang="en")
       header.nav_bar
         div#hamburger.hamburger 
         div.title slackr
+      div.mainView
+        div.thread
+          div.threadHeader
+            div.threadTitle #slackr
+            div.threadUserCount 14
+            div.threadInfoButton
+            div.threadSearch
+              input(type="text", placeholder="Seacrch Thread")
+          div.threadMessages(ng-controller="ThreadMessagesController as tmCtrl")
+            div.message(ng-repeat="message in tmCtrl.messages")
+              div.messageHeader 
+                div.messageTitle {{ message.title }}
+                div.messageAuthor {{ message.name }}
+              div.messageBody {{ message.body }}
+              
   script(src="js/app.js")

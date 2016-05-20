@@ -40,6 +40,15 @@
       ];
   });
 
+  app.controller('ThreadMessagesController', function(){
+    this.messages = [
+      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
+      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
+      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
+      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"},
+      { name: 'Some user', title: "Aswesome message", body: "Holly balls man! This shit be awesome"}
+    ];
+  });
 })();
 
 window.onload = (function(){

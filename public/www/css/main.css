@@ -58,7 +58,7 @@ a {
     cursor: pointer;
     margin-top: 5px; }
     .nav_drawer section.common > .item:hover, .nav_drawer section.common > .more:hover {
-      background-color: #DD2C00; }
+      background-color: #D50000; }
     .nav_drawer section.common > .item .ic, .nav_drawer section.common > .more .ic {
       width: 1em;
       height: 0.7em;
@@ -91,7 +91,7 @@ a {
     .nav_drawer section.footer .avatar {
       width: 80px;
       height: 80px;
-      background-color: #DD2C00;
+      background-color: #D50000;
       background-image: url("http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-plaid-shirt-guy.png");
       background-size: cover; }
     .nav_drawer section.footer .info {
@@ -145,7 +145,7 @@ a {
   transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out; }
   .container .nav_bar {
     height: 60px;
-    background-color: #DD2C00;
+    background-color: #D50000;
     padding: 10px;
     font-size: 1.6em;
     color: #FAFAFA; }
@@ -166,6 +166,50 @@ a {
       display: inline-block;
       vertical-align: top;
       padding: 8px; }
+
+div.thread .threadHeader {
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #F44336;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  font-size: 1.2em;
+  text-align: center;
+  color: white; }
+  div.thread .threadHeader > div {
+    height: 100%;
+    display: flex;
+    align-items: center; }
+  div.thread .threadHeader .threadTitle {
+    font-weight: bold; }
+  div.thread .threadHeader .threadUserCount {
+    margin: 0 10px; }
+  div.thread .threadHeader .threadSearch input {
+    outline: none;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    color: #2d2d2d; }
+
+div.thread .threadMessages {
+  padding: 10px; }
+  div.thread .threadMessages .message {
+    padding: 10px;
+    border-radius: 2px;
+    background-color: #f3f3f3;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    max-width: 600px; }
+    div.thread .threadMessages .message .messageHeader {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      font-size: 1.1em; }
+      div.thread .threadMessages .message .messageHeader .messageTitle, div.thread .threadMessages .message .messageHeader .messageAuthor {
+        display: inline-block; }
+      div.thread .threadMessages .message .messageHeader .messageAuthor {
+        float: right; }
 
 @media screen and (min-width: 1000px) {
   .nav_drawer {
