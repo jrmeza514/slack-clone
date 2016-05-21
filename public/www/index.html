@@ -4,24 +4,30 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta charset="utf-8">
+    <meta theme-color="red">
     <title>Slack Clone</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700,300">
     <link rel="stylesheet" href="css/app.css">
     <link rel="import" href="bower_components/app-layout/app-layout.html">
     <link href="bower_components/iron-icons/iron-icons.html" rel="import">
-    <link rel="import" href="bower_components/paper-elements/paper-elements.html">
+    <link href="bower_components/iron-image/iron-image.html" rel="import">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
+    <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+    <link rel="import" href="views/settings.html">
     <app-drawer-layout fullbleed>
       <app-drawer>
-        <paper-listbox>
-          <paper-item role="option">asd</paper-item>
-          <paper-item role="option">asd</paper-item>
-          <paper-item role="option">asd</paper-item>
-        </paper-listbox>
+        <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation" class="drawer-list"><a name="view1" href="/settings">Settings</a></iron-selector>
       </app-drawer>
       <app-header-layout>
         <app-header>
           <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="menu" drawer-toggle> </paper-icon-button>
             <div title>Slack Clone</div>
             <paper-menu-button horizontal-align="right" horizontal-offset="20" vertical-align="top" vertical-offset="50">
               <paper-icon-button icon="icons:more-vert" class="dropdown-trigger"></paper-icon-button>
@@ -32,9 +38,12 @@
               </paper-menu>
             </paper-menu-button>
           </app-toolbar>
-          <paper-fab icon="icons:add" id="main_action_fab"></paper-fab>
         </app-header>
       </app-header-layout>
+      <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
+        <settings-view name="settingsView"></settings-view>
+      </iron-pages>
+      <paper-fab icon="icons:add" id="main_action_fab"></paper-fab>
     </app-drawer-layout>
     <body></body>
   </head>
