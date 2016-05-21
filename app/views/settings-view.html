@@ -1,0 +1,65 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html"/>
+<dom-module id="settings-view">
+  <template>
+    <style>
+      .wrapper{
+        
+      }
+      .title{
+        text-align: center;
+      }
+      
+      paper-checkbox{
+        --paper-checkbox-checked-ink-color: #FF4081;
+        --paper-checkbox-checked-color: #FF4081;
+        padding: 8px;
+        display: inline-block;
+      }
+      paper-material{
+        padding: 16px;
+        border-bottom: 1px;
+        width: 80%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+      }
+    </style>
+    <div class="wrapper">
+      <div class="title">
+        <h3>Settings</h3>
+      </div>
+      <div class="settings">
+        <paper-material elevation="0" class="privacy">
+          <h4>Privacy</h4>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+        </paper-material>
+        <paper-material elevation="0" class="accessibility">
+          <h4>Accessibility</h4>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+          <paper-checkbox>Access Location</paper-checkbox>
+        </paper-material>
+        <paper-material elevation="0" class="security">
+          <h4>Security</h4>
+          <paper-checkbox>Encrypt</paper-checkbox>
+          <paper-checkbox>Encrypt</paper-checkbox>
+          <paper-checkbox>Encrypt</paper-checkbox>
+          <paper-checkbox>Encrypt</paper-checkbox>
+          <paper-checkbox>Encrypt</paper-checkbox>
+        </paper-material>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'settings-view'
+    });
+  </script>
+</dom-module>

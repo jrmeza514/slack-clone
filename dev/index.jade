@@ -8,44 +8,8 @@ html(lang="en")
     title Slack Clone
     
     link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:400,700,300")
-    
+    link(rel="import", href="bower_components/webcomponentsjs/webcomponents-lite.js")
     link(rel="stylesheet", href="css/app.css")
-    
-    link(rel="import", href="bower_components/app-layout/app-layout.html")
-    link(href="bower_components/iron-icons/iron-icons.html", rel="import")
-    link(href="bower_components/iron-image/iron-image.html", rel="import")
-    
-    link(rel="import", href="bower_components/paper-icon-button/paper-icon-button.html")
-    link(rel="import", href="bower_components/paper-item/paper-item.html")
-    link(rel="import", href="bower_components/paper-fab/paper-fab.html")
-    link(rel="import", href="bower_components/paper-menu/paper-menu.html")
-    link(rel="import", href="bower_components/paper-button/paper-button.html")
-    link(rel="import", href="bower_components/paper-menu-button/paper-menu-button.html")
-    link(rel="import", href="bower_components/paper-card/paper-card.html")
-    link(rel="import", href="bower_components/iron-pages/iron-pages.html")
-    
-    //- My Vews 
-    link(rel="import", href="views/settings.html")
-    
-    app-drawer-layout(fullbleed)
-      app-drawer
-        iron-selector(selected="[[page]]", attr-for-selected="name", class="drawer-list", role="navigation")
-          a(name="view1", href="/settings") Settings
-        
-      app-header-layout
-        app-header
-          app-toolbar
-            paper-icon-button(icon='menu', drawer-toggle) 
-            div(title) Slack Clone
-            paper-menu-button(horizontal-align="right", horizontal-offset="20", vertical-align="top", vertical-offset="50")
-              paper-icon-button(icon="icons:more-vert", class="dropdown-trigger")
-              paper-menu(class="dropdown-content")
-                paper-item Share
-                paper-item Settings
-                paper-item Help
-      iron-pages(role="main", selected="[[page]]", attr-for-selected="name")
-        settings-view(name="settingsView")
-
-      paper-fab(icon="icons:add", id="main_action_fab")
-    
-    body
+    link(rel="import" href="views/slackr-app.html")
+  body
+    slackr-app

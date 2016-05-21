@@ -1,17 +1,22 @@
 body {
   font-family: 'Roboto'; }
 
-app-toolbar {
-  background-color: #3F51B5;
-  color: white; }
+* {
+  -webkit-tap-highlight-color: transparent; }
+
+app-header {
+  color: white;
+  opacity: 1;
+  z-index: 100; }
 
 app-drawer-layout .contentContainer {
-  background-color: #222; }
+  background-color: #222;
+  z-index: 100; }
 
 paper-menu-button paper-icon-button paper-menu {
   left: -100px; }
 
 #main_action_fab {
-  position: absolute;
+  position: fixed;
   right: 15px;
   top: calc( 100vh - 70px); }

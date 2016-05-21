@@ -4,7 +4,7 @@
   "description": "This is a web based slack clone application",
   "main": "index.js",
   "scripts": {
-    "build": "gulp; polymer build --entrypoint app/index.html --fragment app/views/settings.html"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Juan Meza",
   "license": "ISC",

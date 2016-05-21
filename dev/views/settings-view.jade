@@ -1,0 +1,54 @@
+link(rel="import", href="../bower_components/polymer/polymer.html")
+link(rel="import", href="../bower_components/paper-elements/paper-elements.html")
+dom-module(id="settings-view")
+  template
+    style.
+      .wrapper{
+        
+      }
+      .title{
+        text-align: center;
+      }
+      
+      paper-checkbox{
+        --paper-checkbox-checked-ink-color: #FF4081;
+        --paper-checkbox-checked-color: #FF4081;
+        padding: 8px;
+        display: inline-block;
+      }
+      paper-material{
+        padding: 16px;
+        border-bottom: 1px;
+        width: 80%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+      }
+    div.wrapper
+      div.title
+        h3 Settings
+      div.settings
+        paper-material.privacy(elevation=0)
+          h4 Privacy
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+        paper-material.accessibility(elevation=0)
+          h4 Accessibility
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+          paper-checkbox Access Location
+        paper-material.security(elevation=0)
+          h4 Security
+          paper-checkbox Encrypt
+          paper-checkbox Encrypt
+          paper-checkbox Encrypt
+          paper-checkbox Encrypt
+          paper-checkbox Encrypt
+  script.
+    Polymer({
+      is: 'settings-view'
+    });
