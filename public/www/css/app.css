@@ -1,0 +1,26 @@
+
+body{
+  font-family: 'Roboto';
+}
+
+app-toolbar{
+  background-color: #3F51B5;
+  color: white;
+}
+app-drawer-layout .contentContainer{
+  background-color: #222;
+}
+app-drawer{
+}
+.app-drawer-0 #contentContainer.app-drawer{
+}
+
+paper-menu-button paper-icon-button paper-menu{
+  left: -100px;
+}
+
+#main_action_fab{
+  position: absolute;
+  right: 15px;
+  top: calc( 100vh - 70px );
+}
