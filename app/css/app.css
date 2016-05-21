@@ -1,0 +1,22 @@
+body {
+  font-family: 'Roboto'; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }
+
+app-header {
+  color: white;
+  opacity: 1;
+  z-index: 100; }
+
+app-drawer-layout .contentContainer {
+  background-color: #222;
+  z-index: 100; }
+
+paper-menu-button paper-icon-button paper-menu {
+  left: -100px; }
+
+#main_action_fab {
+  position: fixed;
+  right: 15px;
+  top: calc( 100vh - 70px); }

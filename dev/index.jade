@@ -4,70 +4,12 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1")
     meta(name="mobile-web-app-capable", content="yes")
     meta(charset="utf-8")
-    
-    //- stylesheets
-    link(rel="stylesheet", href="css/main.css")
-    link(rel="stylesheet", href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css")
-    
-    //- scripts
-    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js")
-    script(src="js/app.js")
+    meta(theme-color="red")
     title Slack Clone
     
-  body(ng-app="SlackClone")
-    div#nav_drawer.nav_drawer(ng-controller="AppDrawerController")
-      section.head
-        md-input-container(ng-controller="GroupSelectController as gsCtrl")
-          label Group
-          md-select(ng-model="ctrl.selectedGroup")
-            md-option(ng-repeat="group in gsCtrl.groups", value="{{group}}") {{group}}
-      div.wrappersl
-        section.unread.common(ng-controller="SectionUnreadController as suCtrl")
-          div.title {{ suCtrl.title }}
-          li.item(ng-repeat="item in suCtrl.items")
-            a(ng-href="{{item.link}}")
-              div.ic #
-              div.title {{item.name}}
-        section.dm.common(ng-controller="DirectMessagesController as dmCtrl")
-          div.title Direct Messages
-          li.item(ng-repeat="item in dmCtrl.dms")
-            div.ic *
-            div.title {{ item.name }}
-      section.footer
-        div.item.avatar
-        div.item.info
-          div.name  Juan Meza
-          div.status
-            div.status_ic
-            div.status_txt Online
-        div#settings_button.item.settings
-          div#options_menu.menu
-            div.option Profile
-            div.option Help
-            div.option Settings
-            div.option Logout
-        
-    div#nav_back_drop.nav_back_drop
-    div.container
-      header.nav_bar
-        div#hamburger.hamburger 
-        div.title slackr
-      div.mainView
-        div.thread
-          div.threadHeader
-            div.threadTitle #slackr
-            div.threadUserCount 14
-            div.threadInfoButton
-            div.threadSearch
-              input(type="text", placeholder="Seacrch Thread")
-          div.threadMessages(ng-controller="ThreadMessagesController as tmCtrl")
-            div.message(ng-repeat="message in tmCtrl.messages")
-              div.messageHeader 
-                div.messageTitle {{ message.title }}
-                div.messageAuthor {{ message.name }}
-              div.messageBody {{ message.body }}
-              
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:400,700,300")
+    link(rel="import", href="bower_components/webcomponentsjs/webcomponents-lite.js")
+    link(rel="stylesheet", href="css/app.css")
+    link(rel="import" href="views/slackr-app.html")
+  body
+    slackr-app

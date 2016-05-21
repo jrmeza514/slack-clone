@@ -16,7 +16,7 @@ gulp.task('js', function(){
   gulp.src('./dev/js/**/*.js')
       // TODO: Add Minifyin to the pipeline
 
-      .pipe(gulp.dest('./public/www/js/'))
+      .pipe(gulp.dest('./app/js/'))
       .pipe( browserSync.stream());
 });
 /* Gulp task for compiling sass files */
@@ -24,7 +24,7 @@ gulp.task('js', function(){
 gulp.task('sass', function(){
   gulp.src('./dev/sass/**/*.scss')
       .pipe( sass({ pretty: true }))
-      .pipe( gulp.dest('./public/www/css/'))
+      .pipe( gulp.dest('./app/css/'))
       .pipe( browserSync.stream() );
 });
 
@@ -32,14 +32,14 @@ gulp.task('sass', function(){
 gulp.task('jade', function(){
   gulp.src('./dev/**/*.jade')
       .pipe( jade({ pretty: true }))
-      .pipe( gulp.dest('./public/www/'))
+      .pipe( gulp.dest('./app/'))
       .pipe( browserSync.stream());
 });
 
 /* Gulp task for Initializing browser-sync */
 gulp.task('syncInit', function(){
   browserSync.init({
-    server: './public/www/',
+    server: './app/',
     logFileChanges: false
   });
 });

@@ -6,7 +6,7 @@ var express = require('express');
 var soi = require('socket.io');
 
 /* Local Module Imports */
-var app = require('./modules/app.js');
+var app = express();
 
 /* Global variable declarations */
 
@@ -15,4 +15,4 @@ var socket = soi( server );
 
 
 
-app.listen(8000);
+app.listen( process.env.PORT || 8080 );

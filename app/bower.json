@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "homepage": "https://github.com/jrmeza514/slack-clone",
+  "authors": [
+    "Juan Meza <jrmeza514@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.4.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "app-elements": "PolymerElements/app-elements#^0.9.0",
+    "iron-selector": "PolymerElements/iron-selector#^1.5.2"
+  }
+}
