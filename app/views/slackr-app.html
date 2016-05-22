@@ -13,6 +13,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html"/>
 <link rel="../bower_components/iron-selector/iron-selector.html"/>
 <link rel="import" href="settings-view.html"/>
+<link rel="import" href="main-view.html"/>
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html"/>
 <dom-module id="slackr-app">
@@ -40,7 +41,9 @@
     </style>
     <template is="dom-bind">
       <app-drawer-layout fullbleed="fullbleed">
-        <app-drawer></app-drawer>
+        <app-drawer>
+          <paper-item onclick="selectPage('main')">Home</paper-item>
+        </app-drawer>
         <app-header-layout>
           <app-header fixed="fixed" condenses="condenses" effects="parallax-background waterfall resize-title blend-background">
             <app-toolbar>
@@ -49,21 +52,19 @@
               <paper-menu-button horizontal-align="right" horizontal-offset="20" vertical-align="top" vertical-offset="50">
                 <paper-icon-button icon="icons:more-vert" class="dropdown-trigger"></paper-icon-button>
                 <paper-menu class="dropdown-content">
-                  <paper-item>Share</paper-item>
-                  <paper-item onclick="openSettings()">Settings</paper-item>
-                  <paper-item>Help</paper-item>
+                  <paper-item onclick="selectPage('settings')">Settings</paper-item>
                 </paper-menu>
               </paper-menu-button>
             </app-toolbar>
             <app-toolbar>
-              <div title="title">Slack Clone</div>
+              <h2 title="title">Slack Clone</h2>
             </app-toolbar>
           </app-header>
         </app-header-layout>
-        <iron-pages selected="{{pageSelected}}" attr-for-selected="name" id="ironPages">
+        <iron-pages selected="main" attr-for-selected="name" id="ironPages">
+          <main-view name="main" thread-title="Awesome Thread"></main-view>
           <settings-view name="settings"></settings-view>
         </iron-pages>
-        <paper-fab icon="icons:add" id="main_action_fab"></paper-fab>
       </app-drawer-layout>
     </template>
   </template>
@@ -72,8 +73,8 @@
       is:'slackr-app',
       attached: function(){
         var ironPages = document.getElementById('ironPages');
-        openSettings = function (){
-          ironPages.selected = "settings";
+        selectPage = function ( page ){
+          ironPages.selected = page;
         }
       }
     });

@@ -1,0 +1,78 @@
+link(rel="import", href="../bower_components/polymer/polymer.html")
+link(href="../bower_components/iron-icons/iron-icons.html", rel="import")
+link(rel="import", href="../bower_components/paper-input/paper-input.html")
+link(rel="import", href="../bower_components/paper-icon-button/paper-icon-button.html")
+dom-module(id="main-view")
+  template
+    style.
+      .wrapper{
+        padding: 0 16px;
+      }
+      .header{
+        text-align: center;
+      }
+      .composer{
+        display: block;
+        position: absolute;
+        bottom: 16px;
+        width: calc(100% - 24px);
+        display: flex;
+        align-items: flex-end;
+      }
+      .messageViewer{
+        border: 1px solid rgba( 0 , 0 , 0 , 0.1 );
+        height: calc( 100vh - 270px );
+        overflow-y: scroll;
+      }
+      .composer paper-input{
+        width: 100%;
+        display: inline-block;
+      }
+      .composer .sendIcon{
+        width: 48px;
+        margin-left:16px;
+      }
+      .composer paper-icon-button{
+        display: inline-block;
+      }
+    div.wrapper
+      div.header
+        h3 [[thread-title]]
+      div#messageViewer.messageViewer
+      div.composer
+        paper-input(label="Type Your Message")
+        div.sendIcon
+          paper-icon-button(icon="send")
+  script.
+    var SEVER_URL = "http://localhost:8080/messages";
+    
+    var createMessage = function( message ){
+      var msg = document.createElement('chat-message');
+      msg.author = message.author;
+      msg.body = message.body;
+      return msg;
+    }
+    
+    Polymer({
+      is:'main-view',
+      attached: function(){
+        var messagesList = [];
+        var messageViewer = document.getElementById('messageViewer');
+        
+        function updateMessages( messages ) {
+          messages.forEach( message => {
+            var msg = createMessage( message );
+            messageViewer.appendChild( msg );
+          });
+        }
+        
+        fetch(SEVER_URL).then( res => {
+            return res.json();
+        }).then( messages => {
+          console.log( messages );
+          updateMessages( messages );
+        }).catch(err => {
+          console.error( err );
+        });
+      }
+    });

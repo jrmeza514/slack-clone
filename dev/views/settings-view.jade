@@ -1,5 +1,6 @@
 link(rel="import", href="../bower_components/polymer/polymer.html")
 link(rel="import", href="../bower_components/paper-elements/paper-elements.html")
+link(rel="import", href="chat-message.html")
 dom-module(id="settings-view")
   template
     style.
@@ -13,17 +14,30 @@ dom-module(id="settings-view")
       paper-checkbox{
         --paper-checkbox-checked-ink-color: #FF4081;
         --paper-checkbox-checked-color: #FF4081;
-        padding: 8px;
         display: inline-block;
+        font-weight: bold;
       }
       paper-material{
-        padding: 16px;
         border-bottom: 1px;
-        width: 80%;
-        max-width: 500px;
+        width: 90%;
+        max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 16px;
+      }
+      
+      paper-item{
+        display: block;
+        padding: 8px;
+      }
+      
+      .description{
+        display: block;
+        font-size: 0.8em;
+        line-height: 1.2em;
+        color: #2d2d2d;
+        margin-left: 27px;
+        margin-top: 8px;
       }
     div.wrapper
       div.title
@@ -31,23 +45,18 @@ dom-module(id="settings-view")
       div.settings
         paper-material.privacy(elevation=0)
           h4 Privacy
-          paper-checkbox Access Location
-          paper-checkbox Access Location
-          paper-checkbox Access Location
-          paper-checkbox Access Location
-        paper-material.accessibility(elevation=0)
-          h4 Accessibility
-          paper-checkbox Access Location
-          paper-checkbox Access Location
-          paper-checkbox Access Location
-          paper-checkbox Access Location
+          paper-item
+            paper-checkbox Access Location
+            div.description.
+              Allow us to access your location to provide more relevant
+              information
         paper-material.security(elevation=0)
           h4 Security
-          paper-checkbox Encrypt
-          paper-checkbox Encrypt
-          paper-checkbox Encrypt
-          paper-checkbox Encrypt
-          paper-checkbox Encrypt
+          paper-item
+            paper-checkbox Encrypt Data
+            div.description.
+              Encrypt your data on this device to in case your device is stolen
+            
   script.
     Polymer({
       is: 'settings-view'

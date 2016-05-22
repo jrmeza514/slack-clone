@@ -1,0 +1,31 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<dom-module id="chat-message">
+  <template>
+    <style>
+      .wrapper{
+        padding: 4px;
+        margin: 4px;
+        color: white;
+        border-radius: 5px;
+        color: #37474F;
+      }
+      .header{
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      
+    </style>
+    <div class="wrapper"> 
+      <div class="header">
+        <div class="author">[[author]]</div>
+      </div>
+      <div class="body">[[body]]</div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'chat-message'
+    });
+  </script>
+</dom-module>
