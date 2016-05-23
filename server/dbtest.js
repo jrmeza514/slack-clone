@@ -21,24 +21,24 @@ usersManager.registerUser('jrmeza514', '30102514', 'jrmeza514@gmail.com')
 });
 
 
-// var pr = threadManager.createThread('fake-thread').then( ( thread ) => {
-//   console.log( thread );
-//
-//   threadManager.findThread( thread.getThreadId() )
-//   .then( t => {
-//     console.log( t );
-//     threadManager.deleteThread( t.getThreadId() )
-//     .then( () => {
-//       console.log("Eureka: No More fake threads");
-//     })
-//     .catch( err => {
-//       console.error( err );
-//     });
-//   })
-//   .catch( err => {
-//     console.error( err );
-//   });
-//
-// }).catch( err => {
-//   console.error( err );
-// })
+var pr = threadManager.createThread('fake-thread').then( ( thread ) => {
+  console.log( thread );
+
+  threadManager.findThread( thread.getThreadId() )
+  .then( t => {
+    console.log( t );
+    threadManager.deleteThread( t.getThreadId() )
+    .then( () => {
+      console.log("Eureka: No More fake threads");
+    })
+    .catch( err => {
+      console.error( err );
+    });
+  })
+  .catch( err => {
+    console.error( err );
+  });
+
+}).catch( err => {
+  console.error( err );
+})

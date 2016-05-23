@@ -77,7 +77,7 @@ class UsersManager {
         /* Found User */
         .then( users => {
           db.close();
-          resolve( users[0] );
+          resolve( new User(users[0]) );
         })
         /* User Not Found */
         .catch( err => {
