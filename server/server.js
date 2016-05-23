@@ -1,6 +1,6 @@
 /* Core Module Imports */
 var http = require('http');
-
+var bodyParser = require('body-parser');
 /* NPM Module Imports */
 var express = require('express');
 var soi = require('socket.io');
@@ -13,10 +13,9 @@ var app = express();
 var messageRouter = require('./routes/messages.js');
 /* Global variable declarations */
 
+// app.use( bodyParser.json() );
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+  });
 app.use( '/messages', messageRouter );
 
 var server = http.createServer( app );

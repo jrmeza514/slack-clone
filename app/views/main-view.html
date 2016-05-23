@@ -43,9 +43,9 @@
       </div>
       <div id="messageViewer" class="messageViewer"></div>
       <div class="composer">
-        <paper-input label="Type Your Message"></paper-input>
+        <paper-input label="Type Your Message" id="messageInput"></paper-input>
         <div class="sendIcon">
-          <paper-icon-button icon="send"></paper-icon-button>
+          <paper-icon-button icon="send" id="messageSendBtn"></paper-icon-button>
         </div>
       </div>
     </div>
@@ -60,11 +60,37 @@
       return msg;
     }
     
+    function sendMessage( e ){
+      e.stopPropagation();
+      var input = document.getElementById('messageInput');
+      var message = input.value;
+      input.value = "";
+      
+      fetch('http://localhost:8080/messages/add',{
+        method: 'post',
+        body: JSON.stringify({
+          name: 'Juan Meza',
+          body: message
+        })
+      }).then( res => {
+        console.log( res );
+        return res.json();
+      }).then( data => {
+        console.log(data)
+      }).catch( err => console.error( err ));
+    }
+    
     Polymer({
       is:'main-view',
       attached: function(){
         var messagesList = [];
         var messageViewer = document.getElementById('messageViewer');
+        var messageSendBtn = document.getElementById('messageSendBtn');
+        
+        //- Attach event Listeners
+        
+        messageSendBtn.addEventListener('click', sendMessage );
+        messageSendBtn.addEventListener('touchstart', sendMessage );
         
         function updateMessages( messages ) {
           messages.forEach( message => {
