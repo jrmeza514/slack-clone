@@ -1,3 +1,6 @@
+const MongoClient = require('mongodb').MongoClient;
+
+
 class Thread {
   constructor( thread ) {
     this.threadId = thread.threadId;
@@ -14,6 +17,14 @@ class Thread {
 
   getMembers(){
     return this.members;
+  }
+
+  addMember( memberId ){
+  
+  }
+
+  addMessage( message ){
+
   }
 }
 
