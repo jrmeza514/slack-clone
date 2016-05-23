@@ -21,7 +21,8 @@ usersManager.registerUser('jrmeza514', '30102514', 'jrmeza514@gmail.com')
 });
 
 
-var pr = threadManager.createThread('fake-thread').then( ( thread ) => {
+threadManager.createThread('fake-thread')
+.then( ( thread ) => {
   console.log( thread );
 
   threadManager.findThread( thread.getThreadId() )
