@@ -4,28 +4,26 @@
   <template>
     <style>
       .wrapper{
-        padding: 4px;
-        margin: 4px;
-        color: white;
-        border-radius: 5px;
-        color: #37474F;
+      	padding: 4px;
+      	margin: 4px;
+      	color: white;
+      	border-radius: 5px;
+      	color: #37474F;
       }
       .header{
-        font-size: 1.2em;
-        font-weight: bold;
+      	font-size: 1.2em;
+      	font-weight: bold;
       }
       
     </style>
-    <div class="wrapper"> 
-      <div class="header">
-        <div class="author">[[author]]</div>
-      </div>
-      <div class="body">[[body]]</div>
-    </div>
+    <div class="wrapper"> </div>
+    <div class="header"></div>
+    <div class="author">[[author]]</div>
+    <div class="body">[[body]]</div>
   </template>
   <script>
     Polymer({
-      is: 'chat-message'
+    	is: 'chat-message'
     });
   </script>
 </dom-module>

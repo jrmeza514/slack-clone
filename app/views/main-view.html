@@ -7,46 +7,45 @@
   <template>
     <style>
       .wrapper{
-        padding: 0 16px;
+      	padding: 0 16px;
       }
       .header{
-        text-align: center;
+      	text-align: center;
       }
       .composer{
-        display: block;
-        position: absolute;
-        bottom: 16px;
-        width: calc(100% - 24px);
-        display: flex;
-        align-items: flex-end;
+      	display: block;
+      	position: absolute;
+      	bottom: 16px;
+      	width: calc(100% - 24px);
+      	display: flex;
+      	align-items: flex-end
       }
       .messageViewer{
-        border: 1px solid rgba( 0 , 0 , 0 , 0.1 );
-        height: calc( 100vh - 270px );
-        overflow-y: scroll;
+      	border: 1px solid rgba( 0 , 0 , 0 , 0.1 );
+      	height: calc( 100vh - 270px );
+      	overflow-y: scroll;
       }
       .composer paper-input{
-        width: 100%;
-        display: inline-block;
+      	width: 100%;
+      	display: inline-block;
       }
       .composer .sendIcon{
-        width: 48px;
-        margin-left:16px;
+      	width: 48px;
+      	margin-left:16px;
       }
       .composer paper-icon-button{
-        display: inline-block;
+      	display: inline-block;
       }
     </style>
-    <div class="wrapper">
-      <div class="header">
-        <h3>[[thread-title]]</h3>
-      </div>
-      <div id="messageViewer" class="messageViewer"></div>
-      <div class="composer">
-        <paper-input label="Type Your Message" id="messageInput"></paper-input>
-        <div class="sendIcon">
-          <paper-icon-button icon="send" id="messageSendBtn"></paper-icon-button>
-        </div>
+    <div class="wrapper"></div>
+    <div class="header">
+      <h3>[[thread-title]]</h3>
+    </div>
+    <div id="messageViewer" class="messageViewer"></div>
+    <div class="composer">
+      <paper-input label="Type Your Message" id="messageInput"></paper-input>
+      <div class="sendIcon">
+        <paper-icon-button icon="send" id="messageSendBtn"></paper-icon-button>
       </div>
     </div>
   </template>
@@ -54,60 +53,61 @@
     var SEVER_URL = "http://localhost:8080/messages";
     
     var createMessage = function( message ){
-      var msg = document.createElement('chat-message');
-      msg.author = message.author;
-      msg.body = message.body;
-      return msg;
+    	var msg = document.createElement('chat-message');
+    	msg.author = message.author;
+    	msg.body = message.body;
+    	return msg;	
     }
     
     function sendMessage( e ){
-      e.stopPropagation();
-      var input = document.getElementById('messageInput');
-      var message = input.value;
-      input.value = "";
-      
-      fetch('http://localhost:8080/messages/add',{
-        method: 'post',
-        body: JSON.stringify({
-          name: 'Juan Meza',
-          body: message
-        })
-      }).then( res => {
-        console.log( res );
-        return res.json();
-      }).then( data => {
-        console.log(data)
-      }).catch( err => console.error( err ));
+    	e.stopPropagation();
+    	var input = document.getElementById('messageInput');
+    	var message = input.value;
+    	input.value = "";
+    	
+    	fetch('http://localhost:8080/messages/add',{
+    		method: 'post',
+    		body: JSON.stringify({
+    			name: 'Juan Meza',
+    			body: message
+    		})
+    	})
+    	.then( res => {
+    		console.log( res );
+    		return res.json();
+    	})
+    	.then( data => {
+    		console.log(data)
+    	})
+    	.catch( err => console.error( err ));
     }
-    
     Polymer({
-      is:'main-view',
-      attached: function(){
-        var messagesList = [];
-        var messageViewer = document.getElementById('messageViewer');
-        var messageSendBtn = document.getElementById('messageSendBtn');
-        
-        //- Attach event Listeners
-        
-        messageSendBtn.addEventListener('click', sendMessage );
-        messageSendBtn.addEventListener('touchstart', sendMessage );
-        
-        function updateMessages( messages ) {
-          messages.forEach( message => {
-            var msg = createMessage( message );
-            messageViewer.appendChild( msg );
-          });
-        }
-        
-        fetch(SEVER_URL).then( res => {
-            return res.json();
-        }).then( messages => {
-          console.log( messages );
-          updateMessages( messages );
-        }).catch(err => {
-          console.error( err );
-        });
-      }
+    	is:'main-view',
+    	attached: function(){
+    		var messagesList = [];
+    		var messageViewer = document.getElementById('messageViewer');
+    		var messageSendBtn = document.getElementById('messageSendBtn');
+    		//- Attach event Listeners
+    		messageSendBtn.addEventListener('click', sendMessage );
+    		messageSendBtn.addEventListener('touchstart', sendMessage );
+    		
+    		function updateMessages( messages ) {
+    			messages.forEach( message => {
+    				var msg = createMessage( message );
+    				messageViewer.appendChild( msg );
+    			});
+    		}
+    		fetch(SEVER_URL).then( res => {
+    			return res.json();
+    		})
+    		.then( messages => {
+    			console.log( messages );
+    			updateMessages( messages );
+    		})
+    		.catch(err => {
+    			console.error( err );
+    		});
+    	}
     });
   </script>
 </dom-module>
