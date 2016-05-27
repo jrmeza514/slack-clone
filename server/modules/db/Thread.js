@@ -89,7 +89,7 @@ class Thread {
 			usersManager.findUser( message.userId )
 			/* User Does Exist */
 			.then( user => {
-				MongoClient.connect( MONGODB_URL
+				MongoClient.connect( MONGODB_URL)
 					/* Database Connection successful */
 				.then( db => {
 					let threadsCollection = db.collection( THREADS_COLLECTION );
