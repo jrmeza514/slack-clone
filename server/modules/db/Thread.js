@@ -76,11 +76,15 @@ class Thread {
 			- resolve: if the message is Successfully added
 			- reject: if the message is not Successfully Added
 
-		Requirements: 
+		Requirements:
 	*/
 	addMessage( message ){
 		return new Promise((resolve, reject) => {
+			if ( !message.userId || !message.body || !message.timestamp ) {
+				reject( new Error('Message Not Valid') );
+			}
 
+			
 		});
 	}
 }
