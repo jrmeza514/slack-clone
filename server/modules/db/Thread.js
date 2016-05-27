@@ -84,6 +84,11 @@ class Thread {
 			if ( !message.userId || !message.body || !message.timestamp ) {
 				reject( new Error('Message Not Valid') );
 			}
+
+			if ( self.getMembers().indexOf( message.userId ) < 0 ){
+				reject( new Error(`User is not a member of thread: ${self.getThreadId()}`) );
+			}
+
 			let usersManager = new UsersManager();
 			/* Check if the user Exists */
 			usersManager.findUser( message.userId )

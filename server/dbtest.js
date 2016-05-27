@@ -8,7 +8,6 @@ threadManager.createThread('test-thread')
 .then( thread => {
 	usersManager.registerUser('fakeuser', 'faksepassword', 'fakeuser@fakeemail.com')
 	.then( user => {
-
 		Promise.all([
 			thread.addMessage({
 				userId: user.getUserId(),
@@ -46,20 +45,20 @@ threadManager.createThread('test-thread')
 			.catch( err => {
 				usersManager.deleteUser( user.getUserId() );
 				threadManager.deleteThread( thread.getThreadId() );
-				console.error( err );
+				console.log( err.message );
 			});
 		})
 		.catch( err => {
 			usersManager.deleteUser( user.getUserId() );
 			threadManager.deleteThread( thread.getThreadId() );
-			console.error( err );
+			console.log( err.message );
 		});
 	})
 	.catch( err => {
-		console.error( err );
+		console.log( err.message );
 		threadManager.deleteThread( thread.getThreadId() );
 	});
 })
 .catch( err => {
-	console.error( err );
+	console.log( err.message );
 });
