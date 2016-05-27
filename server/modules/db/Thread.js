@@ -79,12 +79,44 @@ class Thread {
 		Requirements:
 	*/
 	addMessage( message ){
+		let self = this;
 		return new Promise((resolve, reject) => {
 			if ( !message.userId || !message.body || !message.timestamp ) {
 				reject( new Error('Message Not Valid') );
 			}
-
-			
+			let usersManager = new UsersManager();
+			/* Check if the user Exists */
+			usersManager.findUser( message.userId )
+			/* User Does Exist */
+			.then( user => {
+				MongoClient.connect( MONGODB_URL
+					/* Database Connection successful */
+				.then( db => {
+					let threadsCollection = db.collection( THREADS_COLLECTION );
+					threadsCollection.update(
+						{ threadId: self.getThreadId() },
+						{ $push: { messages: message }}
+					)
+					/* Successfully Updated Thread */
+					.then( result => {
+						db.close();
+						resolve();
+					})
+					/* Failed To Update Thread:  */
+					.catch( err => {
+						db.close();
+						reject( new Error(" Could Not Add Message") );
+					});
+				})
+				/* Database connect failed */
+				.catch( err => {
+					reject(new Error('Could Not Connect To the Database'));
+				});
+			})
+			/* User Does Not Exist */
+			.catch( err => {
+				reject( new Error('User Does Not Exist'));
+			});
 		});
 	}
 }
