@@ -8,7 +8,24 @@ router.route('/')
 .get(( req, res ) => {
 	res.send('Welcome to the api!');
 });
-
+/*
+	GET ALL THREADS
+*/
+router.route('/threads')
+.get(( req, res ) => {
+	threadsManager.getAllThreads()
+	.then( threads => {
+		res.json({
+			threads: threads
+		});
+	})
+	.catch( err => {
+		res.send("Nothing Found");
+	})
+});
+/*
+	GET THREAD BY ID
+*/
 router.route('/threads/:threadId')
 .get(( req, res ) => {
 	let threadId = req.params.threadId;

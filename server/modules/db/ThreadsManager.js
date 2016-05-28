@@ -87,6 +87,27 @@ class ThreadsManager {
 			});
 		});
 	}
+
+	getAllThreads(){
+		return new Promise(( resolve, reject ) => {
+			MongoClient.connect( MONGODB_URL )
+			.then( db => {
+				let threadsCollection = db.collection(THREADS_COLLECTION);
+				threadsCollection.find({}).toArray()
+				.then( results => {
+					db.close();
+					resolve( results );
+				})
+				.catch( err => {
+					db.close();
+					reject( err );
+				});
+			})
+			.catch( err => {
+					reject( err );
+			});
+		});
+	}
 }
 
 module.exports = ThreadsManager;
