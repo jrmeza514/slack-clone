@@ -24,6 +24,41 @@ class Thread {
 		return this.members;
 	}
 
+	__reconstruct( thread ){
+		if ( this.getThreadId() !== thread.threadId) {
+			return;
+		}
+
+		this.messages = thread.messages;
+		this.members = thread.members;
+	}
+	/*
+		This method will update the contents of the Thread Object
+		with values fresh from the Database
+	*/
+	updateContents(){
+		let self = this;
+		MongoClient.connect( MONGODB_URL )
+		.then( db => {
+			let collection = db.collection( THREADS_COLLECTION );
+
+			collection.find({
+				threadId: self.getThreadId()
+			}).toArray()
+			.then( result => {
+				this.__reconstruct( result[0] );
+				db.close();
+				resolve();
+			})
+			.catch( err => {
+				db.close();
+				reject( err );
+			});
+		})
+		.catch( err => {
+			reject( err );
+		});
+	}
 	/*
 		This method should return a promise that will either:
 			- resolve if the user is Successfully added to the Thread

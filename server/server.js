@@ -11,12 +11,14 @@ var app = express();
 /* Route Imports */
 
 var messageRouter = require('./routes/messages.js');
+var apiRouter = require('./routes/api/ApiRouter.js');
+
 /* Global variable declarations */
 
 // app.use( bodyParser.json() );
-app.use(function(req, res, next) {
-  });
+
 app.use( '/messages', messageRouter );
+app.use('/api', apiRouter );
 
 var server = http.createServer( app );
 var socket = soi( server );
