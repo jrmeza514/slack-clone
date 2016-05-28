@@ -20,7 +20,10 @@ router.route('/threads')
 		});
 	})
 	.catch( err => {
-		res.send("Nothing Found");
+		res.json({
+			result: null,
+			message: `No Threads Found.`
+		});
 	})
 });
 /*
