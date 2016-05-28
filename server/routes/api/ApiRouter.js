@@ -16,7 +16,7 @@ router.route('/threads')
 	threadsManager.getAllThreads()
 	.then( threads => {
 		res.json({
-			threads: threads
+			results: threads
 		});
 	})
 	.catch( err => {
@@ -31,10 +31,15 @@ router.route('/threads/:threadId')
 	let threadId = req.params.threadId;
 	threadsManager.findThread( threadId )
 	.then( thread => {
-		res.json( thread );
+		res.json({
+			results: thread
+		});
 	})
 	.catch( err => {
-		res.send(`Thread '${threadId}' does not exist: Please Check Spelling`);
+		res.json({
+			results: null,
+			message: `Nothing found for ${threadId}`
+		});
 	});
 });
 
