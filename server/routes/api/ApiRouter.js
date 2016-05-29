@@ -1,5 +1,8 @@
 const express = require('express');
 const ThreadsManager = require('../../modules/db/ThreadsManager.js');
+const UsersManager = require('../../modules/db/UsersManager.js');
+
+const usersManager = new UsersManager();
 const threadsManager = new ThreadsManager();
 
 let router = express.Router();
@@ -44,6 +47,27 @@ router.route('/threads/:threadId')
 			message: `Nothing found for ${threadId}`
 		});
 	});
+});
+
+/*
+	Get All UserById
+*/
+router.route('/users/:userId')
+.get(( req, res ) => {
+	let userId = req.params.userId;
+	usersManager.findUser( userId )
+	.then( user => {
+		res.json({
+			results: user
+		});
+	})
+	.catch( err => {
+		res.json({
+			results: null,
+			message: `No user ${userId} was found.`
+		});
+	});
+
 });
 
 
