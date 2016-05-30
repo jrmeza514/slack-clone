@@ -48,6 +48,25 @@ router.route('/threads/:threadId')
 		});
 	});
 });
+/*
+	Get All Users
+*/
+
+router.route('/users')
+.get(( req, res ) => {
+	usersManager.getAllUsers()
+	.then( userList => {
+		res.json({
+			results: userList
+		});
+	})
+	.catch( err => {
+		res.json({
+			results: null,
+			message: `Unable to retrieve any users`
+		});
+	});
+});
 
 /*
 	Get All UserById

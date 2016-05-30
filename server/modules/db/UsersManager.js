@@ -91,6 +91,27 @@ class UsersManager {
       });
     });
   }
+
+	getAllUsers(){
+		return new Promise(( resolve, reject ) => {
+			MongoClient.connect( MONGODB_URL )
+			.then( db => {
+				let usersCollection = db.collection( USERS_COLLECTION );
+				usersCollection.find({}).toArray()
+				.then( userList => {
+					db.close();
+					resolve( userList );
+				})
+				.catch( err => {
+					db.close();
+					reject( err );
+				});
+			})
+			.catch( err => {
+				reject( err );
+			});
+		});
+	}
 }
 
 module.exports = UsersManager;
