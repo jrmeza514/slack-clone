@@ -9,7 +9,15 @@ let router = express.Router();
 
 router.route('/')
 .get(( req, res ) => {
-	res.send('Welcome to the api!');
+	res.json({
+		message: 'Welcome to the API. Please Make a request to one of the following endpoints:',
+		endpoints: [
+			'/api/users',
+			'/api/users/:userId',
+			'/api/threads',
+			'/api/threads/:threadId'
+		]
+	});
 });
 /*
 	GET ALL THREADS
