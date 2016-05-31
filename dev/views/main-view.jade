@@ -14,8 +14,9 @@ dom-module(id="main-view")
 			.composer{
 				display: block;
 				position: absolute;
-				bottom: 16px;
-				width: calc(100% - 24px);
+				box-sizing: border-box;
+				padding: 8px 16px;
+				width: 100%;
 				display: flex;
 				align-items: flex-end
 			}
@@ -91,15 +92,15 @@ dom-module(id="main-view")
 						messageViewer.appendChild( msg );
 					});
 				}
-				fetch(SEVER_URL).then( res => {
-					return res.json();
-				})
-				.then( messages => {
-					console.log( messages );
-					updateMessages( messages );
-				})
-				.catch(err => {
-					console.error( err );
-				});
+				//- fetch(SEVER_URL).then( res => {
+				//- 	return res.json();
+				//- })
+				//- .then( messages => {
+				//- 	console.log( messages );
+				//- 	updateMessages( messages );
+				//- })
+				//- .catch(err => {
+				//- 	console.error( err );
+				//- });
 			}
 		});
