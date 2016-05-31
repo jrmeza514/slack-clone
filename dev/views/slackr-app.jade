@@ -16,53 +16,52 @@ link(rel="import", href="main-view.html")
 link(rel="import", href="../bower_components/polymer/polymer.html")
 link(rel="import", href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html")
 dom-module(id="slackr-app")
-  template
-    style.
-      app-header-layout{
-        opacity: 1;
-        z-index: 1;
-      }
-      app-drawer{
-        z-index: 2;
-      }
-      app-header{
-        --app-header-background-front-layer: {
-          background-image: url('http://app-layout-assets.appspot.com/assets/bg1.jpg');
-        };
-        --app-header-background-rear-layer: {
-          background-color: #3F51B5;
-          
-        };
-        --app-header-shadow: {
-           box-shadow: inset 0px 5px 2px -3px rgba(0, 0, 0, 0.2);
-         };
-      }
-    template(is='dom-bind')
-      app-drawer-layout(fullbleed)
-        app-drawer
-          paper-item(onclick="selectPage('main')") Home
-        app-header-layout
-          app-header(fixed, condenses,  effects="parallax-background waterfall resize-title blend-background")
-            app-toolbar
-              paper-icon-button(icon='menu', drawer-toggle) 
-              div(condensed-title) Slack Clone
-              paper-menu-button(horizontal-align="right", horizontal-offset="20", vertical-align="top", vertical-offset="50")
-                paper-icon-button(icon="icons:more-vert", class="dropdown-trigger")
-                paper-menu(class="dropdown-content")
-                  paper-item(onclick="selectPage('settings')") Settings
-            app-toolbar
-              h2(title) Slack Clone
-        iron-pages(selected="main", attr-for-selected="name",id="ironPages")
-          main-view(name="main", thread-title="Awesome Thread")
-          settings-view(name="settings")
-        //- paper-fab(icon="icons:add", id="main_action_fab")
-  script.
-    var el = Polymer({
-      is:'slackr-app',
-      attached: function(){
-        var ironPages = document.getElementById('ironPages');
-        selectPage = function ( page ){
-          ironPages.selected = page;
-        }
-      }
-    });
+	template
+		style.
+			app-header-layout{
+				opacity: 1;	
+				z-index: 1;
+			}	
+			app-drawer{
+				z-index: 2;
+			}
+			app-header{
+				--app-header-background-front-layer: {
+					background-image: url('http://app-layout-assets.appspot.com/assets/bg1.jpg');	
+				};
+				--app-header-background-rear-layer: {
+					background-color: #3F51B5;
+				};
+				--app-header-shadow: {
+					box-shadow: inset 0px 5px 2px -3px rgba(0, 0, 0, 0.2);
+				};
+			}
+		template(is='dom-bind')
+			app-drawer-layout(fullbleed)
+				app-drawer
+					paper-item(onclick="selectPage('main')") Home
+				app-header-layout
+					app-header(fixed, condenses,  effects="parallax-background waterfall resize-title blend-background")
+						app-toolbar
+							paper-icon-button(icon='menu', drawer-toggle) 
+							div(condensed-title) Slack Clone
+							paper-menu-button(horizontal-align="right", horizontal-offset="20", vertical-align="top", vertical-offset="50")
+								paper-icon-button(icon="icons:more-vert", class="dropdown-trigger")
+								paper-menu(class="dropdown-content")
+									paper-item(onclick="selectPage('settings')") Settings
+						app-toolbar
+							h2(title) Slack Clone
+					iron-pages(selected="main", attr-for-selected="name",id="ironPages")
+						main-view(name="main", thread-title="Awesome Thread")
+						settings-view(name="settings")
+						//- paper-fab(icon="icons:add", id="main_action_fab")
+	script.
+		Polymer({
+			is:'slackr-app',
+			attached: function(){
+				var ironPages = document.getElementById('ironPages');
+				selectPage = function ( page ){
+					ironPages.selected = page;
+				}
+			}
+		});
