@@ -1,9 +1,12 @@
 const express = require('express');
 const ThreadsManager = require('../../modules/db/ThreadsManager.js');
 const UsersManager = require('../../modules/db/UsersManager.js');
+const bodyParser = require('body-parser');
 
 const usersManager = new UsersManager();
 const threadsManager = new ThreadsManager();
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 let router = express.Router();
 
@@ -97,5 +100,14 @@ router.route('/users/:userId')
 
 });
 
+/*
+	Auth User
+*/
+// TODO: Figure out how to get POST data
+router.route('/login')
+.post( urlencodedParser, ( req, res ) => {
+	res.status(200);
+	res.send('Cool');
+});
 
 module.exports = router;
