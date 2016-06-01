@@ -1,10 +1,13 @@
 const express = require('express');
 const ThreadsManager = require('../../modules/db/ThreadsManager.js');
 const UsersManager = require('../../modules/db/UsersManager.js');
+const AuthManager = require('../../modules/auth/AuthManager.js');
+
 const bodyParser = require('body-parser');
 
 const usersManager = new UsersManager();
 const threadsManager = new ThreadsManager();
+const authManager = new AuthManager();
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -105,9 +108,32 @@ router.route('/users/:userId')
 */
 // TODO: Figure out how to get POST data
 router.route('/login')
-.post( urlencodedParser, ( req, res ) => {
-	res.status(200);
-	res.send('Cool');
+.post( bodyParser.json() , ( req, res ) => {
+	let userId = req.body.userId;
+	let password = req.body.password;
+
+	if ( userId && password ) {
+		authManager.authorizeSession({ userId, password })
+		.then(() => {
+			res.status( 200 );
+			/*
+				The Crendentials have been Successfully validated but
+				we are still sending random garbage as a response.
+				This should return a sessionToken
+			*/
+			res.json({
+				sessionToken: '72y3rbc3ygb273r62b38xnn'
+			});
+		})
+		.catch( err => {
+			res.status(400);
+			res.send('Crendentials Invalid!');
+		});
+	}
+	else {
+		res.status(400);
+		res.send('Invalid Request: Include userId and password.');
+	}
 });
 
 module.exports = router;
