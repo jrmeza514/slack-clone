@@ -13,6 +13,7 @@ link(rel="import", href="../bower_components/iron-pages/iron-pages.html")
 link(rel="import". href="../bower_components/iron-selector/iron-selector.html")
 link(rel="import", href="settings-view.html")
 link(rel="import", href="main-view.html")
+link(rel="import", href="login-view.html")
 link(rel="import", href="../bower_components/polymer/polymer.html")
 link(rel="import", href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html")
 dom-module(id="slackr-app")
@@ -51,7 +52,8 @@ dom-module(id="slackr-app")
 									paper-item(onclick="selectPage('settings')") Settings
 						app-toolbar
 							h2(title) Slack Clone
-					iron-pages(selected="main", attr-for-selected="name",id="ironPages")
+					iron-pages(selected="login", attr-for-selected="name",id="ironPages")
+						login-view(name="login")
 						main-view(name="main", thread-title="Awesome Thread")
 						settings-view(name="settings")
 						//- paper-fab(icon="icons:add", id="main_action_fab")

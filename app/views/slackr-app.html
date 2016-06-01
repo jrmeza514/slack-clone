@@ -14,6 +14,7 @@
 <link rel="../bower_components/iron-selector/iron-selector.html"/>
 <link rel="import" href="settings-view.html"/>
 <link rel="import" href="main-view.html"/>
+<link rel="import" href="login-view.html"/>
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html"/>
 <dom-module id="slackr-app">
@@ -59,7 +60,8 @@
               <h2 title="title">Slack Clone</h2>
             </app-toolbar>
           </app-header>
-          <iron-pages selected="main" attr-for-selected="name" id="ironPages">
+          <iron-pages selected="login" attr-for-selected="name" id="ironPages">
+            <login-view name="login"></login-view>
             <main-view name="main" thread-title="Awesome Thread"></main-view>
             <settings-view name="settings"></settings-view>
           </iron-pages>
