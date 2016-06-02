@@ -2,7 +2,13 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <dom-module id="login-view">
   <template>
-    <h1>Login</h1>
+    <div>
+      <form action="http://localhost:8080/api/login" method="post" enctype="application/x-www-form-urlencoded">
+        <input placeholder="Username" name="userId"/>
+        <input type="password" placeholder="Password" name="password"/>
+        <input type="submit" value="submit"/>
+      </form>
+    </div>
   </template>
   <script>
     Polymer({
