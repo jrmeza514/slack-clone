@@ -108,7 +108,8 @@ router.route('/users/:userId')
 */
 // TODO: Figure out how to get POST data
 router.route('/login')
-.post( bodyParser.json() , ( req, res ) => {
+.post( bodyParser.urlencoded({ extended: true }) , ( req, res ) => {
+	console.log( req );
 	let userId = req.body.userId;
 	let password = req.body.password;
 
