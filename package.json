@@ -1,24 +1,24 @@
 {
-  "name": "slack-clone",
-  "version": "1.0.0",
-  "description": "This is a web based slack clone application",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Juan Meza",
-  "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.12.8",
-    "gulp": "^3.9.1",
-    "gulp-jade": "^1.1.0",
-    "gulp-sass": "^2.3.1"
-  },
-  "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.1",
-    "express": "^4.13.4",
-    "mongodb": "^2.1.19",
-    "socket.io": "^1.4.6"
-  }
+	"name": "slack-clone",
+	"version": "1.0.0",
+	"description": "This is a web based slack clone application",
+	"main": "index.js",
+	"scripts": {
+		"start": "node server/server.js"
+	},
+	"author": "Juan Meza",
+	"license": "ISC",
+	"devDependencies": {
+		"browser-sync": "^2.12.8",
+		"gulp": "^3.9.1",
+		"gulp-jade": "^1.1.0",
+		"gulp-sass": "^2.3.1"
+	},
+	"dependencies": {
+		"bcrypt-nodejs": "0.0.3",
+		"body-parser": "^1.15.1",
+		"express": "^4.13.4",
+		"mongodb": "^2.1.19",
+		"socket.io": "^1.4.6"
+	}
 }

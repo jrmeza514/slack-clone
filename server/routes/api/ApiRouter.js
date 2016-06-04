@@ -109,7 +109,6 @@ router.route('/users/:userId')
 // TODO: Figure out how to get POST data
 router.route('/login')
 .post( bodyParser.urlencoded({ extended: true }) , ( req, res ) => {
-	console.log( req );
 	let userId = req.body.userId;
 	let password = req.body.password;
 
@@ -137,4 +136,20 @@ router.route('/login')
 	}
 });
 
+
+router.route('/register')
+.post( bodyParser.urlencoded({ extended: true }) , ( req , res ) => {
+	let userId = req.body.userId;
+	let password = req.body.password;
+	let password_verify = req.body.password_verify;
+	let email = req.body.email;
+
+	if ( userId && password && password_verify && email ) {
+		// TODO: Create User and 
+	}
+	else {
+		res.status(400);
+		res.send('Invalid Request: Include userId, password, password_verify and email');
+	}
+});
 module.exports = router;
