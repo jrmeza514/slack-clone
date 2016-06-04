@@ -20,7 +20,7 @@ class UsersManager {
       .then( db => {
         let usersCollection = db.collection( USERS_COLLECTION );
 
-        usersCollection.insert({ userId: userId, passwordHash: passwordHash, email: email })
+        usersCollection.insert({ userId: userId, passwordHash: passwordHash, email: email , sessions: []})
         /*  User Insertion successful */
         .then( result => {
           db.close();
