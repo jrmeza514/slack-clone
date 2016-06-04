@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const UsersManager = require('../db/UsersManager.js');
 const usersManager = new UsersManager();
-
+const _24_HOURS_IN_SECS = 172800;
 class AuthManager {
 
 	authorizeSession( unauthorizedUser ){
@@ -13,7 +13,20 @@ class AuthManager {
 				let unauthHash = bcrypt.hashSync( unauthorizedUser.password );
 				let passwordMatch = bcrypt.compareSync( unauthorizedUser.password , user.passwordHash );
 				if ( passwordMatch ) {
-					resolve();
+
+					let sessionToken = bcrypt.hashSync( Math.random().toString() );
+					let timestamp = Date.now();
+					let expires = timestamp + _24_HOURS_IN_SECS;
+					let session = { sessionToken, timestamp, expires };
+
+					user.addActiveSession( session )
+					.then(() => {
+						resolve( session );
+					})
+					.catch((err) => {
+						reject( err );
+					});
+
 				}
 				else {
 					reject( new Error('Pass Does Not Match'));
@@ -24,6 +37,7 @@ class AuthManager {
 			});
 		});
 	}
+
 }
 
 module.exports = AuthManager;
