@@ -144,8 +144,19 @@ router.route('/register')
 	let password_verify = req.body.password_verify;
 	let email = req.body.email;
 
-	if ( userId && password && password_verify && email ) {
-		// TODO: Create User and 
+	/* Ensure all needed parameters are included and passwords match */
+	if ( userId && password && password_verify && email && password === password_verify ) {
+		// TODO: Create User
+		usersManager.registerUser( userId, password, email )
+		.then( user => {
+			res.status( 200 );
+
+			res.json( user );
+		})
+		.catch( err => {
+			res.status( 400 );
+			res.send('Error: User Creation Failed Try Again Later.');
+		});
 	}
 	else {
 		res.status(400);
