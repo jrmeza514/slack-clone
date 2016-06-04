@@ -114,15 +114,10 @@ router.route('/login')
 
 	if ( userId && password ) {
 		authManager.authorizeSession({ userId, password })
-		.then(() => {
+		.then(( session ) => {
 			res.status( 200 );
-			/*
-				The Crendentials have been Successfully validated but
-				we are still sending random garbage as a response.
-				This should return a sessionToken
-			*/
 			res.json({
-				sessionToken: '72y3rbc3ygb273r62b38xnn'
+				session
 			});
 		})
 		.catch( err => {
@@ -145,18 +140,25 @@ router.route('/register')
 	let email = req.body.email;
 
 	/* Ensure all needed parameters are included and passwords match */
-	if ( userId && password && password_verify && email && password === password_verify ) {
-		// TODO: Create User
-		usersManager.registerUser( userId, password, email )
-		.then( user => {
-			res.status( 200 );
+	if ( userId && password && password_verify && email ) {
 
-			res.json( user );
-		})
-		.catch( err => {
-			res.status( 400 );
-			res.send('Error: User Creation Failed Try Again Later.');
-		});
+		if  ( password === password_verify){
+			usersManager.registerUser( userId, password, email )
+			.then( user => {
+				res.status( 200 );
+				res.json( user );
+			})
+			.catch( err => {
+				res.status( 400 );
+				res.send('Error: User Creation Failed Try Again Later.');
+			});
+		}
+		else {
+			res.status(400);
+			res.send('Passwords do not Match');
+		}
+		// TODO: Create User
+
 	}
 	else {
 		res.status(400);
