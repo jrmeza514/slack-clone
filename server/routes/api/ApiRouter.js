@@ -12,6 +12,9 @@ const authManager = new AuthManager();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 let router = express.Router();
+let usersRouter = express.Router({ mergeParams: true });
+
+router.use('/users/:userId', usersRouter)
 
 router.route('/')
 .get(( req, res ) => {
@@ -101,6 +104,27 @@ router.route('/users/:userId')
 		});
 	});
 
+});
+
+usersRouter.route('/sessions')
+.get(( req, res ) => {
+	let userId = req.params.userId;
+	usersManager.findUser( userId )
+	.then((user) => {
+		user.getActiveUserSessions()
+		.then((sessions) => {
+			res.status( 200 );
+			res.json({ sessions })
+		})
+		.catch((err) => {
+			res.status( 400 );
+			res.send("Error: Unable To Get Sessions");
+		});
+	})
+	.catch((err) => {
+		res.status( 400 );
+		res.send("Error: user not found");
+	});
 });
 
 /*
