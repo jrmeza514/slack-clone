@@ -1,21 +1,30 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
+/* Load Modules */
 const ThreadsManager = require('../../modules/db/ThreadsManager.js');
 const UsersManager = require('../../modules/db/UsersManager.js');
 const AuthManager = require('../../modules/auth/AuthManager.js');
 
-const bodyParser = require('body-parser');
+const AuthRouter = require('./auth/AuthRouter.js');
+const UsersRouter = require('./users/UsersRouter.js');
+const ThreadsRouter = require('./threads/ThreadsRouter.js');
 
+
+/* Local Variables */
 const usersManager = new UsersManager();
 const threadsManager = new ThreadsManager();
 const authManager = new AuthManager();
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const router = express.Router();
 
-let router = express.Router();
-let usersRouter = express.Router({ mergeParams: true });
+router.use('/auth', AuthRouter );
+router.use('/users', UsersRouter );
+router.use('/threads', ThreadsRouter );
 
-router.use('/users/:userId', usersRouter)
-
+/********************************************************************************
+	API HOMEPAGE
+********************************************************************************/
 router.route('/')
 .get(( req, res ) => {
 	res.json({
@@ -28,165 +37,5 @@ router.route('/')
 		]
 	});
 });
-/*
-	GET ALL THREADS
-*/
-router.route('/threads')
-.get(( req, res ) => {
-	threadsManager.getAllThreads()
-	.then( threads => {
-		res.json({
-			results: threads
-		});
-	})
-	.catch( err => {
-		res.json({
-			result: null,
-			message: `No Threads Found.`
-		});
-	})
-});
-/*
-	GET THREAD BY ID
-*/
-router.route('/threads/:threadId')
-.get(( req, res ) => {
-	let threadId = req.params.threadId;
-	threadsManager.findThread( threadId )
-	.then( thread => {
-		res.json({
-			results: thread
-		});
-	})
-	.catch( err => {
-		res.json({
-			results: null,
-			message: `Nothing found for ${threadId}`
-		});
-	});
-});
-/*
-	Get All Users
-*/
 
-router.route('/users')
-.get(( req, res ) => {
-	usersManager.getAllUsers()
-	.then( userList => {
-		res.json({
-			results: userList
-		});
-	})
-	.catch( err => {
-		res.json({
-			results: null,
-			message: `Unable to retrieve any users`
-		});
-	});
-});
-
-/*
-	Get All UserById
-*/
-router.route('/users/:userId')
-.get(( req, res ) => {
-	let userId = req.params.userId;
-	usersManager.findUser( userId )
-	.then( user => {
-		res.json({
-			results: user
-		});
-	})
-	.catch( err => {
-		res.json({
-			results: null,
-			message: `No user ${userId} was found.`
-		});
-	});
-
-});
-
-usersRouter.route('/sessions')
-.get(( req, res ) => {
-	let userId = req.params.userId;
-	usersManager.findUser( userId )
-	.then((user) => {
-		user.getActiveUserSessions()
-		.then((sessions) => {
-			res.status( 200 );
-			res.json({ sessions })
-		})
-		.catch((err) => {
-			res.status( 400 );
-			res.send("Error: Unable To Get Sessions");
-		});
-	})
-	.catch((err) => {
-		res.status( 400 );
-		res.send("Error: user not found");
-	});
-});
-
-/*
-	Auth User
-*/
-// TODO: Figure out how to get POST data
-router.route('/login')
-.post( bodyParser.urlencoded({ extended: true }) , ( req, res ) => {
-	let userId = req.body.userId;
-	let password = req.body.password;
-
-	if ( userId && password ) {
-		authManager.authorizeSession({ userId, password })
-		.then(( session ) => {
-			res.status( 200 );
-			res.json({
-				session
-			});
-		})
-		.catch( err => {
-			res.status(400);
-			res.send('Crendentials Invalid!');
-		});
-	}
-	else {
-		res.status(400);
-		res.send('Invalid Request: Include userId and password.');
-	}
-});
-
-
-router.route('/register')
-.post( bodyParser.urlencoded({ extended: true }) , ( req , res ) => {
-	let userId = req.body.userId;
-	let password = req.body.password;
-	let password_verify = req.body.password_verify;
-	let email = req.body.email;
-
-	/* Ensure all needed parameters are included and passwords match */
-	if ( userId && password && password_verify && email ) {
-
-		if  ( password === password_verify){
-			usersManager.registerUser( userId, password, email )
-			.then( user => {
-				res.status( 200 );
-				res.json( user );
-			})
-			.catch( err => {
-				res.status( 400 );
-				res.send('Error: User Creation Failed Try Again Later.');
-			});
-		}
-		else {
-			res.status(400);
-			res.send('Passwords do not Match');
-		}
-		// TODO: Create User
-
-	}
-	else {
-		res.status(400);
-		res.send('Invalid Request: Include userId, password, password_verify and email');
-	}
-});
 module.exports = router;
