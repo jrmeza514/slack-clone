@@ -2,7 +2,7 @@ link(rel="import", href="../bower_components/polymer/polymer.html")
 dom-module(id="register-view")
 	template
 		div
-			form(action="http://localhost:8080/api/register", method="post", enctype="application/x-www-form-urlencoded")
+			form(action="http://localhost:8080/api/auth/register", method="post", enctype="application/x-www-form-urlencoded", id='registration-form')
 				input(placeholder="Username", name="userId")
 				input(type="password", placeholder="Password", name="password")
 				input(type="password", placeholder="Verify Password", name="password_verify")
@@ -12,6 +12,28 @@ dom-module(id="register-view")
 		Polymer({
 			is:'register-view',
 			attached: function(){
-			
+				const regForm = document.getElementById('registration-form');
+				regForm.addEventListener('submit', e => {
+					e.preventDefault();
+					const data = new FormData( e.target );
+					
+					let params = `userId=${encodeURIComponent(data.get('userId'))}&password=${encodeURIComponent(data.get('password'))}&password_verify=${encodeURIComponent(data.get('password_verify'))}&email=${encodeURIComponent( data.get('email'))}`
+					
+					console.log( params );
+					
+					let xhr = new XMLHttpRequest();
+					xhr.open('POST', 'http://localhost:8080/api/auth/register', true );
+					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							console.log( xhr.responseText );
+						}
+					};
+					xhr.send( params );
+					
+					
+				});
 			}
 		});
+		
