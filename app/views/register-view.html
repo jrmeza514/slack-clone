@@ -21,10 +21,10 @@
     			e.preventDefault();
     			let regPromise = register( regForm );
     			regPromise.then( user => {
-    				
+    				console.log( user );
     			})
     			.catch((err) => {
-    				
+    				console.log( err );
     			});
     		});
     	}
@@ -35,28 +35,37 @@
     		const data = new FormData( form );
     		const REG_API_URL = 'http://localhost:8080/api/auth/register';
     		const METHOD = 'POST';
-    		
-    		let params =
-    		  `userId=${encodeURIComponent(data.get('userId'))}`
-    		+ `&password=${encodeURIComponent(data.get('password'))}` 
-    		+ `&password_verify=${encodeURIComponent(data.get('password_verify'))}`
-    		+ `&email=${encodeURIComponent(data.get('email'))}`;
-    		
-    		let xhr = new XMLHttpRequest();
-    		
-    		xhr.open( METHOD , REG_API_URL, true );
-    		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    		
-    		xhr.onreadystatechange = function() {
-    			if ( xhr.readyState == 4 && xhr.status == 200 ) {
-    				let json = JSON.parse( xhr.responseText );
-    				resolve( json );
+    		let params = encodeFormData( data );
+    		fetch( REG_API_URL , {
+    			method: METHOD,
+    			body: params,
+    			headers: {
+    				"Content-type": "application/x-www-form-urlencoded"
     			}
-    		}
-    		
-    		xhr.send( params );
-    		
+    		})
+    		.then( res => {
+    			return res.json();
+    		})
+    		.then( data => {
+    			console.log( data );
+    		})
+    		.catch((err) => {
+    			console.error(err);
+    		});
     	});
+    }
+    
+    function encodeFormData( formData ) {
+    	let keys = formData.keys();
+    	let urldata = '';
+    	let n = keys.next();
+    	while ( !n.done ) {
+    		let key = n.value;
+    		if ( urldata ) urldata += '&';
+    		urldata += `${key}=${encodeURIComponent(formData.get(key))}`;
+    		n = keys.next();
+    	}
+    	return urldata;
     }
   </script>
 </dom-module>
