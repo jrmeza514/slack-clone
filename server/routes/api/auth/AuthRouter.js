@@ -16,13 +16,15 @@ const RegisterRouter = require('./register/RegisterRouter.js');
 
 const router = express.Router();
 
-router.use('/login', LoginRouter );
-router.use('/register', RegisterRouter );
+router.use('/login', LoginRouter);
+router.use('/register', RegisterRouter);
 
 router.route('/')
-.get(( req , res ) => {
-	res.status( 200 );
-	res.json({ message: 'Pleae Make a Post Request'});
-});
+	.get((req, res) => {
+		res.status(200);
+		res.json({
+			message: 'Pleae Make a Post Request'
+		});
+	});
 
 module.exports = router;
