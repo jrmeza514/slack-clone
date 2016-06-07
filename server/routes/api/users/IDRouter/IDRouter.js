@@ -15,16 +15,24 @@ const router = express.Router({
 	mergeParams: true
 });
 
+/* Middleware that ensures that a user can only make request about themselves */
 router.use((req, res, next) => {
+	// Try to find user
 	usersManager.findUser(req.params.userId)
+		// User found
 		.then(user => {
+			// Try to get user sessions
 			user.getActiveUserSessions()
+				// sessions found
 				.then(tokens => {
 					tokens.forEach(token => {
+						// User is Logged In
 						if (token.sessionToken === req.cookies.sessionToken) {
 							req.user = user;
 							next();
-						} else {
+						}
+						// User is not Logged in
+						else {
 							res.json({
 								results: null,
 								message: 'Crendentials Invalid'
@@ -32,13 +40,15 @@ router.use((req, res, next) => {
 						}
 					});
 				})
+				// sessions not found
 				.catch(err => {
 					res.json({
 						results: null,
-						message: 'Unable to authenticate'
+						message: 'Unable to retrieve sessions'
 					})
 				});
 		})
+		// User Not Found
 		.catch(err => {
 			res.json({
 				results: null,
@@ -49,42 +59,25 @@ router.use((req, res, next) => {
 
 router.route('/')
 	.get((req, res) => {
-		let userId = req.params.userId;
-		usersManager.findUser(userId)
-			.then(user => {
-				res.json({
-					results: user
-				});
-			})
-			.catch(err => {
-				res.json({
-					results: null,
-					message: `No user ${userId} was found.`
-				});
-			});
+		res.json({
+			results: req.user
+		});
 
 	});
 
 router.route('/sessions')
 	.get((req, res) => {
-		let userId = req.params.userId;
-		usersManager.findUser(userId)
-			.then((user) => {
-				user.getActiveUserSessions()
-					.then((sessions) => {
-						res.status(200);
-						res.json({
-							sessions
-						})
-					})
-					.catch((err) => {
-						res.status(400);
-						res.send("Error: Unable To Get Sessions");
-					});
+		req.user.getActiveUserSessions()
+			.then(sessions => {
+				res.json({
+					results: sessions
+				});
 			})
-			.catch((err) => {
-				res.status(400);
-				res.send("Error: user not found");
+			.catch(err => {
+				res.json({
+					results: null,
+					message: 'Unable to get sessions'
+				});
 			});
 	});
 
