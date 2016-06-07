@@ -27,7 +27,7 @@ router.route('/')
 	.catch( err => {
 		res.json({
 			results: null,
-			message: `Unable to retrieve any users` 
+			message: 'Unable to retrieve any users'
 		});
 	});
 });

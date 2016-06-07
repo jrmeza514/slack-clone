@@ -19,26 +19,44 @@
     		const regForm = document.getElementById('registration-form');
     		regForm.addEventListener('submit', e => {
     			e.preventDefault();
-    			const data = new FormData( e.target );
-    			
-    			let params = `userId=${encodeURIComponent(data.get('userId'))}&password=${encodeURIComponent(data.get('password'))}&password_verify=${encodeURIComponent(data.get('password_verify'))}&email=${encodeURIComponent( data.get('email'))}`
-    			
-    			console.log( params );
-    			
-    			let xhr = new XMLHttpRequest();
-    			xhr.open('POST', 'http://localhost:8080/api/auth/register', true );
-    			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    			
-    			xhr.onreadystatechange = function() {
-    				if (xhr.readyState == 4 && xhr.status == 200) {
-    					console.log( xhr.responseText );
-    				}
-    			};
-    			xhr.send( params );
-    			
-    			
+    			let regPromise = register( regForm );
+    			regPromise.then( user => {
+    				
+    			})
+    			.catch((err) => {
+    				
+    			});
     		});
     	}
     });
+    
+    function register( form ){
+    	return new Promise(( resolve, reject ) => {
+    		const data = new FormData( form );
+    		const REG_API_URL = 'http://localhost:8080/api/auth/register';
+    		const METHOD = 'POST';
+    		
+    		let params =
+    		  `userId=${encodeURIComponent(data.get('userId'))}`
+    		+ `&password=${encodeURIComponent(data.get('password'))}` 
+    		+ `&password_verify=${encodeURIComponent(data.get('password_verify'))}`
+    		+ `&email=${encodeURIComponent(data.get('email'))}`;
+    		
+    		let xhr = new XMLHttpRequest();
+    		
+    		xhr.open( METHOD , REG_API_URL, true );
+    		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    		
+    		xhr.onreadystatechange = function() {
+    			if ( xhr.readyState == 4 && xhr.status == 200 ) {
+    				let json = JSON.parse( xhr.responseText );
+    				resolve( json );
+    			}
+    		}
+    		
+    		xhr.send( params );
+    		
+    	});
+    }
   </script>
 </dom-module>
