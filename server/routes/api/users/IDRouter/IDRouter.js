@@ -15,6 +15,38 @@ const router = express.Router({
 	mergeParams: true
 });
 
+router.use((req, res, next) => {
+	usersManager.findUser(req.params.userId)
+		.then(user => {
+			user.getActiveUserSessions()
+				.then(tokens => {
+					tokens.forEach(token => {
+						if (token.sessionToken === req.cookies.sessionToken) {
+							req.user = user;
+							next();
+						} else {
+							res.json({
+								results: null,
+								message: 'Crendentials Invalid'
+							})
+						}
+					});
+				})
+				.catch(err => {
+					res.json({
+						results: null,
+						message: 'Unable to authenticate'
+					})
+				});
+		})
+		.catch(err => {
+			res.json({
+				results: null,
+				message: `No user ${userId} was found.`
+			});
+		});
+});
+
 router.route('/')
 	.get((req, res) => {
 		let userId = req.params.userId;
