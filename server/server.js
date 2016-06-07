@@ -1,6 +1,7 @@
 /* Core Module Imports */
 const http = require('http');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 /* NPM Module Imports */
 const express = require('express');
@@ -17,6 +18,8 @@ app.use(function(req, res, next) {
 		"Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
+
+app.use(cookieParser());
 
 app.use('/api', apiRouter);
 
