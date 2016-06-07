@@ -31,12 +31,16 @@ router.route('/')
 					});
 				})
 				.catch(err => {
-					res.status(400);
-					res.send('Crendentials Invalid!');
+					res.status(200);
+					res.json({
+						message: 'Crendentials Invalid'
+					});
 				});
 		} else {
-			res.status(400);
-			res.send('Invalid Request: Include userId and password.');
+			res.status(200);
+			res.json({
+				message: 'Invalid Request: Include userId and password.'
+			});
 		}
 	})
 	/* Hadle Get Request for Login Endpoint */
