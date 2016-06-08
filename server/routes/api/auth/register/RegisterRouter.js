@@ -31,22 +31,29 @@ router.route('/')
 			if (password === password_verify) {
 				usersManager.registerUser(userId, password, email)
 					.then(user => {
-						res.status(200);
-						res.json(user);
+						res.json({
+							results: user
+						});
 					})
 					.catch(err => {
-						res.status(200);
-						res.send('Error: User Creation Failed Try Again Later.');
+						res.json({
+							results: null,
+							message: 'Error: User Creation Failed Try Again Later.'
+						});
 					});
 			} else {
-				res.status(400);
-				res.send('Passwords do not Match');
+				res.json({
+					results: null,
+					message: 'Passwords Do Not Match'
+				});
 			}
 			// TODO: Create User
 
 		} else {
-			res.status(200);
-			res.json(req.body);
+			res.json({
+				result: null,
+				message: 'Please Inclue all required fields'
+			})
 		}
 	})
 
