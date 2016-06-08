@@ -13,13 +13,12 @@ const authManager = new AuthManager();
 
 const router = express.Router();
 
-const urlencodedParser = bodyParser.urlencoded({
-	extended: false
-});
-const jsonParser = bodyParser.json();
+router.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 router.route('/')
-	.post(urlencodedParser, jsonParser, (req, res) => {
+	.post((req, res) => {
 		const userId = req.body.userId;
 		const password = req.body.password;
 		const password_verify = req.body.password_verify;

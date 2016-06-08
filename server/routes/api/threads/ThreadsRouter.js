@@ -15,7 +15,9 @@ const router = express.Router();
 const IDRouter = require('./IDRouter/IDRouter.js');
 
 router.use('/:threadId', IDRouter);
-
+router.use(bodyParser.urlencoded({
+	extended: false
+}));
 /* Get All Threads */
 router.route('/')
 	.get((req, res) => {
@@ -33,4 +35,8 @@ router.route('/')
 			})
 	});
 
+router.route('/create')
+	.post((req, res) => {
+
+	});
 module.exports = router;

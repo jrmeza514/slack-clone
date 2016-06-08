@@ -12,11 +12,13 @@ const threadsManager = new ThreadsManager();
 const authManager = new AuthManager();
 const router = express.Router();
 
+router.use(bodyParser.urlencoded({
+	extended: true
+}));
+
 router.route('/')
 	/* Handle Post Request for the Login Endpoint */
-	.post(bodyParser.urlencoded({
-		extended: true
-	}), (req, res) => {
+	.post((req, res) => {
 		let userId = req.body.userId;
 		let password = req.body.password;
 
