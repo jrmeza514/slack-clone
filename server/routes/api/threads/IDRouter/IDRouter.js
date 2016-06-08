@@ -15,21 +15,28 @@ const router = express.Router({
 	mergeParams: true
 });
 
+router.use((req, res, next) => {
+	let threadId = req.params.threadId;
+	// Try to find thread
+	threadsManager.findThread(threadId)
+		// thread found
+		.then(thread => {
+			req.thread = thread;
+		})
+		// thread not found
+		.catch(err => {
+			res.json({
+				results: null,
+				message: `Nothing found for ${threadId}`
+			});
+		});
+});
+
 router.route('/')
 	.get((req, res) => {
-		let threadId = req.params.threadId;
-		threadsManager.findThread(threadId)
-			.then(thread => {
-				res.json({
-					results: thread
-				});
-			})
-			.catch(err => {
-				res.json({
-					results: null,
-					message: `Nothing found for ${threadId}`
-				});
-			});
+		res.json({
+			results: req.thread
+		})
 	});
 
 module.exports = router;
