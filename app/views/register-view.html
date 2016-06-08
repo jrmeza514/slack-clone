@@ -43,10 +43,10 @@
     			return res.json();
     		})
     		.then( data => {
-    			resolve( data );
+    			resolve( data.results );
     		})
     		.catch((err) => {
-    			console.error(err);
+    			reject( err );
     		});
     	});
     }
