@@ -22,6 +22,7 @@ router.use((req, res, next) => {
 		// thread found
 		.then(thread => {
 			req.thread = thread;
+			next();
 		})
 		// thread not found
 		.catch(err => {
@@ -37,6 +38,21 @@ router.route('/')
 		res.json({
 			results: req.thread
 		})
+	});
+
+router.route('/members')
+	.get((req, res) => {
+		req.thread.updateContents()
+			.then(() => {
+				res.json({
+					results: req.thread.getMembers()
+				});
+			})
+			.catch(err => {
+				res.json({
+					results: req.thread.getMembers()
+				})
+			});
 	});
 
 module.exports = router;
