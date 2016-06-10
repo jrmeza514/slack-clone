@@ -55,4 +55,19 @@ router.route('/members')
 			});
 	});
 
+router.route('/messages')
+	.get((req, res) => {
+		req.thread.updateContents()
+			.then(() => {
+				res.json({
+					results: req.thread.getMessages()
+				})
+			})
+			.catch(err => {
+				res.json({
+					results: null,
+					message: 'Unable to Retrieve data'
+				})
+			});
+	});
 module.exports = router;
