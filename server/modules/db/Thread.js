@@ -1,4 +1,6 @@
-const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb')
+	.MongoClient;
+const mongoose = require('mongoose');
 const User = require('./User.js');
 const UsersManager = require('./UsersManager.js');
 
@@ -39,13 +41,15 @@ class Thread {
 	updateContents() {
 			let self = this;
 			return new Promise((resolve, reject) => {
+				// Old Code
 				MongoClient.connect(MONGODB_URL)
 					.then(db => {
 						let collection = db.collection(THREADS_COLLECTION);
 
 						collection.find({
 								threadId: self.getThreadId()
-							}).toArray()
+							})
+							.toArray()
 							.then(result => {
 								this.__reconstruct(result[0]);
 								db.close();
@@ -125,8 +129,10 @@ class Thread {
 				reject(new Error('Message Not Valid'));
 			}
 
-			if (self.getMembers().indexOf(message.userId) < 0) {
-				reject(new Error(`User is not a member of thread: ${self.getThreadId()}`));
+			if (self.getMembers()
+				.indexOf(message.userId) < 0) {
+				reject(new Error(
+					`User is not a member of thread: ${self.getThreadId()}`));
 			}
 
 			let usersManager = new UsersManager();
