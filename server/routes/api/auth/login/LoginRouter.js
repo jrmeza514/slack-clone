@@ -42,7 +42,7 @@ router.route('/')
 		} else {
 			res.status(200);
 			res.json({
-				results: null
+				results: null,
 				message: 'Invalid Request: Include userId and password.'
 			});
 		}

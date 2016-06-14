@@ -51,6 +51,8 @@ dom-module(id="slackr-app")
 								paper-icon-button(icon="icons:more-vert", class="dropdown-trigger")
 								paper-menu(class="dropdown-content")
 									paper-item(onclick="selectPage('settings')") Settings
+									paper-item(onclick="selectPage('register')") Register
+									paper-item(onclick="selectPage('login')") Login
 						app-toolbar
 							h2(title) Slack Clone
 					iron-pages(selected="register", attr-for-selected="name",id="ironPages")
