@@ -29,18 +29,20 @@ router.route('/')
 				.then((session) => {
 					res.status(200);
 					res.json({
-						session
+						results: session
 					});
 				})
 				.catch(err => {
 					res.status(200);
 					res.json({
+						results: null,
 						message: 'Crendentials Invalid'
 					});
 				});
 		} else {
 			res.status(200);
 			res.json({
+				results: null
 				message: 'Invalid Request: Include userId and password.'
 			});
 		}
