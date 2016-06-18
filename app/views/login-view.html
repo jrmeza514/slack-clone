@@ -56,6 +56,15 @@
     
     function triggerLogin() {
     	login( document.forms.loginForm)
+    	.then( res => {
+    		
+    		document.cookie = `sessionToken=${res.results.sessionToken};`;
+    		document.cookie = `sessionTimestamp=${res.results.timestamp};`;
+    		document.cookie = `sessionExpires=${res.results.expires}`;
     	})
+    	.catch((err) => {
+    		console.log( err );
+    	})
+    }
   </script>
 </dom-module>
