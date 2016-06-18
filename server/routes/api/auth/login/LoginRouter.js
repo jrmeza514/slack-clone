@@ -31,6 +31,7 @@ router.route('/')
 					res.json({
 						results: session
 					});
+					console.log(session);
 				})
 				.catch(err => {
 					res.status(200);
