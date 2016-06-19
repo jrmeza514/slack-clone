@@ -8,9 +8,24 @@ const express = require('express');
 const soi = require('socket.io');
 
 /* Route Imports */
-const apiRouter = require('./routes/api/ApiRouter.js');
+const apiRouter = require('./routes/api/ApiRouter');
+const appRouter = require('./routes/app/AppRouter');
 
 const app = express();
+const server = http.createServer(app);
+const socket = soi(server);
+
+app.set('view engine', 'jade');
+
+app.set('views', '../app/views');
+
+// app.use('/css', express.static(`${__dirname}/../app/css`));
+
+app.use(cookieParser());
+
+app.use('/api', apiRouter);
+
+app.use('/', appRouter);
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -18,12 +33,5 @@ app.use(function(req, res, next) {
 		"Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
-
-app.use(cookieParser());
-
-app.use('/api', apiRouter);
-
-const server = http.createServer(app);
-const socket = soi(server);
 
 app.listen(process.env.PORT || 8080);

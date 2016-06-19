@@ -1,0 +1,45 @@
+extends base
+block head
+	title Login
+block body
+	form(name="loginForm")
+		paper-input(label='Username', name='userId')
+		paper-input(label='password', name='password')
+		paper-button(label='submit', onclick='triggerLogin()') Login
+	
+	script.
+		function login( form ) {
+			return new Promise(( resolve, reject) => {
+				const LOGIN_API_URL = 'http://localhost:8080/api/auth/login';
+				const METHOD = 'POST';
+				const params = encodeFormData( form );
+				
+				fetch( LOGIN_API_URL , {
+					method: METHOD,
+					body: params,
+					headers: {
+						'Content-type': 'application/x-www-form-urlencoded'
+					}
+				})
+				.then( result => {
+					return result.json();
+				})
+				.then( data => {
+					resolve( data );
+				})
+				.catch( err => {
+					reject( err );
+				})
+			})
+		}
+		
+		function encodeFormData( form ) {
+			const formData = new FormData( form );
+			let keys = formData.keys();
+			let urldata = '';
+			for (key of keys) {
+				if (urldata) urldata += '&';
+				urldata += `${key}=${encodeURIComponent(formData.get(key))}`
+			}
+			return urldata;
+		}
