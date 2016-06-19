@@ -43,3 +43,16 @@ block body
 			}
 			return urldata;
 		}
+		
+		function triggerLogin() {
+			login( document.forms.loginForm )
+			.then( res => {
+				console.log(res);
+				document.cookie = `sessionToken=${res.results.sessionToken};`;
+				document.cookie = `sessionTimestamp=${res.results.timestamp};`;
+				document.cookie = `sessionExpires=${res.results.expires}`;
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+		}
