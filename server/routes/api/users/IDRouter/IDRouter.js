@@ -31,14 +31,14 @@ router.use((req, res, next) => {
 							req.user = user;
 							next();
 						}
-						// User is not Logged in
-						else {
-							res.json({
-								results: null,
-								message: 'Crendentials Invalid'
-							})
-						}
 					});
+
+					if (!req.user) {
+						res.json({
+							results: null,
+							message: 'Crendentials Invalid'
+						})
+					}
 				})
 				// sessions not found
 				.catch(err => {
