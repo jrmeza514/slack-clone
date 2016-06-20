@@ -34,4 +34,11 @@ router.get('/dashboard', (req, res) => {
 	res.render('dashboard');
 });
 
+router.get('/logout', (req, res) => {
+	res.clearCookie('sessionToken');
+	res.clearCookie('sessionExpires');
+	res.clearCookie('sessionTimestamp');
+	res.redirect('/');
+});
+
 module.exports = router;

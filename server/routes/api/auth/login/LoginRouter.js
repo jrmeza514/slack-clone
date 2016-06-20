@@ -28,6 +28,9 @@ router.route('/')
 				})
 				.then((session) => {
 					res.status(200);
+					res.cookie('sessionToken', session.sessionToken);
+					res.cookie('sessionTimestamp', session.sessionTimestamp);
+					res.cookie('sessionExpires', session.sessionExpires);
 					res.json({
 						results: session
 					});
