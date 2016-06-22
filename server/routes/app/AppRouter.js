@@ -18,8 +18,21 @@ router.use('/bower', express.static(
 	`${__dirname}/../../../app/bower_components`));
 
 function sessionManager(req, res, next) {
-	let loggedIn = req.cookies.sessionToken;
-	console.log(loggedIn);
+	console.log(req);
+	let loggedIn = false;
+
+	let sessionToken = req.cookies.sessionToken;
+	let userId = req.cookies.userId;
+	let sessionExpires = parseInt(req.cookies.sessionExpires);
+	let timestamp = Date.now();
+
+	console.log(sessionExpires > timestamp);
+	if (sessionToken)
+		loggedIn = true;
+
+	if (sessionExpires < timestamp)
+		res.redirect('/logout');
+
 	if (loggedIn)
 		next();
 	else
