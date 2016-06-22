@@ -1,7 +1,17 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+const AuthManager = require('../../modules/auth/AuthManager');
+const authManager = new AuthManager();
+const UsersManager = require('../../modules/db/UsersManager');
+const usersManager = new UsersManager();
+
 const router = express.Router();
 
+router.use(bodyParser.urlencoded({
+	extended: true
+}));
 router.use(cookieParser());
 router.use('/css', express.static(`${__dirname}/../../../app/css`));
 router.use('/bower', express.static(
