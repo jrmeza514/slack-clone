@@ -127,6 +127,7 @@ router.get('/logout', (req, res) => {
 	res.clearCookie('sessionToken');
 	res.clearCookie('sessionExpires');
 	res.clearCookie('sessionTimestamp');
+	res.clearCookie('userId');
 	res.redirect('/');
 });
 
