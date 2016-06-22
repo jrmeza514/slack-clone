@@ -80,6 +80,37 @@ class User {
 				});
 		});
 	}
+
+	removeActiveSession(sessionToken) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			MongoClient.connect(MONGODB_URL)
+				.then(db => {
+					let usersCollection = db.collection(USERS_COLLECTION);
+
+					usersCollection.update({
+							userId: self.getUserId()
+						}, {
+							$pull: {
+								sessions: {
+									sessionToken: sessionToken
+								}
+							}
+						})
+						.then(results => {
+							db.close();
+							resolve(results);
+						})
+						.catch(err => {
+							db.close()
+							reject(new Error('Unable to update'))
+						})
+				})
+				.catch(err => {
+					reject(new Error('Database Connection Failed'));
+				})
+		});
+	}
 }
 
 module.exports = User;
