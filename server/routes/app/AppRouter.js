@@ -79,6 +79,34 @@ router.get('/register', (req, res) => {
 	res.render('register');
 });
 
+router.post('/register', (req, res) => {
+	const userId = req.body.userId;
+	const password = req.body.password;
+	const password_verify = req.body.password_verify;
+	const email = req.body.email;
+
+
+	/* Ensure all needed parameters are included and passwords match */
+	if (userId && password && password_verify && email) {
+		if (password === password_verify) {
+			usersManager.registerUser(userId, password, email)
+				.then(user => {
+					res.redirect('login');
+				})
+				.catch(err => {
+					console.log('err');
+					res.redirect('register');
+				});
+		} else {
+			res.redirect('register')
+			console.log('passwords do not match');
+		}
+	} else {
+		console.log('Include All');
+		res.redirect('register');
+	}
+});
+
 router.get('/dashboard', (req, res) => {
 	res.render('dashboard');
 });
