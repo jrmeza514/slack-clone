@@ -24,8 +24,6 @@ router.route('/')
 		const password_verify = req.body.password_verify;
 		const email = req.body.email;
 
-		console.log(userId);
-		// console.log(req.body);
 		/* Ensure all needed parameters are included and passwords match */
 		if (userId && password && password_verify && email) {
 			if (password === password_verify) {
@@ -47,7 +45,6 @@ router.route('/')
 					message: 'Passwords Do Not Match'
 				});
 			}
-			// TODO: Create User
 
 		} else {
 			res.json({
