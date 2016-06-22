@@ -4,5 +4,5 @@ block head
 block body
 	form(name="loginForm", enctype='application/x-www-form-urlencoded', method='post', action='login')
 		paper-input(label='Username', name='userId')
-		paper-input(label='password', name='password')
+		paper-input(label='password', name='password', type='password')
 		paper-button(label='submit', onclick='document.forms.loginForm.submit()') Login
