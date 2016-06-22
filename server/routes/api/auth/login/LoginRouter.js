@@ -27,24 +27,17 @@ router.route('/')
 					userId, password
 				})
 				.then((session) => {
-					res.status(200);
-					res.cookie('sessionToken', session.sessionToken);
-					res.cookie('sessionTimestamp', session.sessionTimestamp);
-					res.cookie('sessionExpires', session.sessionExpires);
 					res.json({
 						results: session
 					});
-					console.log(session);
 				})
 				.catch(err => {
-					res.status(200);
 					res.json({
 						results: null,
 						message: 'Crendentials Invalid'
 					});
 				});
 		} else {
-			res.status(200);
 			res.json({
 				results: null,
 				message: 'Invalid Request: Include userId and password.'
@@ -53,7 +46,6 @@ router.route('/')
 	})
 	/* Hadle Get Request for Login Endpoint */
 	.get((req, res) => {
-		res.status(200);
 		res.json({
 			message: 'Please Make A Post Request'
 		});
