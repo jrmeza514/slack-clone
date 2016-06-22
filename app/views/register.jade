@@ -1,5 +1,10 @@
 extends base
 block head
 	title Register
-block body 
-	h1 Register
+block body
+	form(name="registerForm", enctype='application/x-www-form-urlencoded', method='post', action='register')
+		paper-input(label='Username', name='userId')
+		paper-input(label='password', name='password', type='password')
+		paper-input(label='Verify Password', name='password_verify', type='password')
+		paper-input(label='Email', name='email', type='email')
+		paper-button(label='submit', onclick='document.forms.registerForm.submit()') Register
