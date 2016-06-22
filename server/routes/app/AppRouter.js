@@ -52,6 +52,27 @@ router.get('/login', (req, res) => {
 		res.redirect('/');
 });
 
+router.post('/login', (req, res) => {
+	let userId = req.body.userId;
+	let password = req.body.password;
+
+	if (userId && password) {
+		authManager.authorizeSession({
+				userId, password
+			})
+			.then(session => {
+				res.cookie('userId', userId);
+				res.cookie('sessionToken', session.sessionToken);
+				res.cookie('sessionTimestamp', session.timestamp);
+				res.cookie('sessionExpires', session.expires);
+				res.redirect('/');
+			})
+			.catch((err) => {
+				res.redirect('/');
+			})
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.get('/register', (req, res) => {
