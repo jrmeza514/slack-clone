@@ -112,6 +112,18 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+	let userId = req.cookies.userId;
+	let sessionToken = req.cookies.sessionToken;
+
+	if (userId && sessionToken) {
+		usersManager.findUser(userId)
+			.then(user => {
+				user.removeActiveSession(sessionToken);
+			});
+	}
+
+
+
 	res.clearCookie('sessionToken');
 	res.clearCookie('sessionExpires');
 	res.clearCookie('sessionTimestamp');
