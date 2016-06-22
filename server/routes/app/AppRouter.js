@@ -46,7 +46,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-	res.render('login');
+	if (!req.cookies.sessionToken)
+		res.render('login');
+	else
+		res.redirect('/');
+});
+
 });
 
 router.get('/register', (req, res) => {
